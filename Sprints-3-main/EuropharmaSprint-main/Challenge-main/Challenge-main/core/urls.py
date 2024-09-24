@@ -15,8 +15,4 @@ urlpatterns = [
     path('listar_usuario/', views.listar_usuario, name='listar_usuario'),
     path('faq/', views.faq, name='faq'),
     path('cadastro_pergunta/', views.cadastro_pergunta, name='cadastro_pergunta'),
-
-
-
-
 ]

@@ -99,7 +99,8 @@ def faq(request):
     query = request.GET.get('q')
     
     if query:
-        perguntas = Pergunta.objects.filter(usuario__username__icontains(query))
+        # Filtra perguntas que têm um usuário associado e cujo nome de usuário contém a consulta
+        perguntas = Pergunta.objects.filter(usuario__username__icontains=query).exclude(usuario__isnull=True)
     else:
         perguntas = Pergunta.objects.all()
     
@@ -111,7 +112,7 @@ def faq(request):
         if form.is_valid():
             resposta = form.save(commit=False)
             resposta.pergunta = pergunta
-            resposta.save()  
+            resposta.save()  # Salva a resposta sem associar a um usuário
             return redirect('faq')
     else:
         form = RespostaForm()
