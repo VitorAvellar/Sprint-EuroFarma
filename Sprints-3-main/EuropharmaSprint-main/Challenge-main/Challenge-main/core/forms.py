@@ -1,0 +1,71 @@
+from django import forms
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from .models import Clientes, Setores, AcervoVideos, Pergunta, TipoPergunta, Resposta
+
+
+class ClienteForm(UserCreationForm):
+    nome = forms.CharField(max_length=255)
+    setor = forms.ModelChoiceField(queryset=Setores.objects.all())
+    data_de_nascimento = forms.DateField(widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control', 'format': '%Y-%m-%d'}))
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password1', 'password2')
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.email = self.cleaned_data['email']
+        if commit:
+            user.save()
+
+        cliente, created = Clientes.objects.update_or_create(
+            usuario=user,
+            defaults={
+                'nome': self.cleaned_data['nome'],
+                'data_de_nascimento': self.cleaned_data['data_de_nascimento'],
+                'setor': self.cleaned_data['setor']
+            }
+        )
+
+        cliente.save()
+
+        return user
+
+
+class AcervoVideoForm(forms.ModelForm):
+    class Meta:
+        model = AcervoVideos
+        exclude = ()
+
+        widgets = {
+            'nome_video': forms.TextInput(attrs={'class': 'form-control', 'autofocus': ''}),
+            'url_video': forms.URLInput(attrs={'class': 'form-control'}),
+            'descricao': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+
+class PerguntaForm(forms.ModelForm):
+    username = forms.CharField(max_length=150, help_text="Informe seu nome de usuário já cadastrado")
+
+    class Meta:
+        model = Pergunta
+        fields = ['username', 'tipo_pergunta', 'texto_pergunta']
+        widgets = {
+            'tipo_pergunta': forms.Select(attrs={'class': 'form-control'}),
+            'texto_pergunta': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+        }
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if not User.objects.filter(username=username).exists():
+            raise forms.ValidationError("O usuário informado não existe. Por favor, forneça um nome de usuário válido.")
+        return username
+    
+class RespostaForm(forms.ModelForm):
+    class Meta:
+        model = Resposta
+        fields = ['texto_resposta']  
+        widgets = {
+            'texto_resposta': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+        }

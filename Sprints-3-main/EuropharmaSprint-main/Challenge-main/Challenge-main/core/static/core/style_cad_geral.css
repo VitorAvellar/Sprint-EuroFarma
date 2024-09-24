@@ -1,0 +1,141 @@
+body{
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.txt{
+    font-size: 2em;
+    text-decoration: underline;
+}
+
+.hdr{
+    width: 100%;
+    display: flex;
+
+}
+
+.hdr_eur{
+justify-content: start;
+}
+
+.hdr_eur img{
+    max-width: 100px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.icon{
+max-width: 30px;
+max-height: 30px;
+margin-right: 2px;
+margin-left: 10px;
+margin-bottom: 10px;
+}
+
+.hdr_lgn{
+    display: flex;
+    width: 100%;
+    text-align: right;
+    justify-content: end;
+    align-items: flex-end;
+    margin-right: 10px;
+}
+
+.container{
+margin-top: 10px;
+padding-top:50px;
+padding-bottom:50px;
+width: 100%;
+display: flex;
+background-color: #03358E;
+justify-content: center;
+flex-wrap: wrap;
+}
+
+.usuarios{
+    padding:20px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+}
+
+.setores{
+    padding:20px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.modulos{
+    padding:20px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+}
+
+.conteudos{
+    padding:20px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+}
+
+.treinamentos{
+    padding:20px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+}
+
+.img{
+    max-width: 300px;
+    border-style: solid;
+    border-color: rgb(65, 61, 61);
+    border-radius: 20px;
+}
+
+.voltar{
+ padding:30px;
+ background-color: #03358E;
+}
+
+.btn{
+    margin-top: 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10em;
+    font-size: x-large;
+}
+.btn a{
+    text-decoration: none;
+    color: inherit;
+    background: none;
+    border: none;
+}
+
+.btn:hover{
+    background-color: #03358E;
+}
+
+
+hr {
+    border: 0;
+    border-top: 5px solid #000;
+    margin: 1px 0;
+}

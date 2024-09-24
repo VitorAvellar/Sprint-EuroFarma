@@ -1,0 +1,120 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    margin-top: 0;
+    text-align: center;
+}
+
+.faq_perguntas {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.btn {
+    background-color: #3259d8;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #16199c;
+}
+
+form {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    width: 200px;
+    height: 30px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button[type="submit"] {
+    background-color: #3259d8;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #16199c;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    background-color: #fff;
+    padding: 1em;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    word-wrap: break-word; /* Add this line to wrap long text */
+}
+
+li strong {
+    font-weight: bold;
+}
+
+li em {
+    font-style: italic;
+    color: #666;
+}
+
+
+ul ul {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+ul ul li {
+    background-color: #f9f9f9;
+    padding: 0.5em;
+    margin-bottom: 10px;
+    box-shadow: none;
+}
+
+ul ul li:hover {
+    background-color: #f0f0f0;
+}
+
+
+#respostaForm {
+    display: none;
+    margin-top: 10px;
+}
+
+#respostaForm textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+#respostaForm button[type="submit"] {
+    background-color: #3259d8;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#respostaForm button[type="submit"]:hover {
+    background-color: #16199c;
+}

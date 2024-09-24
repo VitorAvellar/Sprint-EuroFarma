@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'core/style_acervo_videos.css' %}">
+</head>
+<body>
+
+    <header>
+        <div class="hdr">
+            <div class="hdr_eur">
+                <img class="eur" src="../../static/images/europahma.png" alt="">
+            </div>
+            <div class="hdr_lgn">
+                
+                <img class="icon" src="../../static/images/user.png" alt="">
+                <p id="var_usu"></p>
+            </div>
+        </div>
+    </header>
+    <hr>
+    <h1> Treinamentos</h1>
+
+    <div class="video-container">
+        {% for video in videos %}
+        <div class="video-item">
+            <iframe
+                src="https://www.youtube.com/embed/{{ video|slice:'32:43' }}"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="voltar">
+        <button class="btn"><a href="index">VOLTAR</a></button>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', validaUsu);
+    </script>
+</body>
+</html>

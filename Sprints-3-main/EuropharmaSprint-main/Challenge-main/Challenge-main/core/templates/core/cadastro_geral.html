@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'core/style_cad_geral.css' %}">
+</head>
+<body>
+
+    <header>
+        <div class="hdr">
+            <div class="hdr_eur">
+                <img class="eur" src="../../static/images/europahma.png" alt="">
+            </div>
+            <div class="hdr_lgn">
+                
+                <img class="icon" src="../../static/images/user.png" alt="">
+                <p id="var_usu"></p>
+            </div>
+        </div>
+    </header>
+    <hr>
+    <h1> Portal Do Administrador</h1>
+
+    <div class="container">
+        <div class="usuarios">
+            <img class="img" src="../../static/images/usuario.png" alt="">
+            <a href="{% url 'cadastro_usuario' %}">
+                <button class="btn">Cadastrar Usuários</button>
+            </a>
+
+            <a href="{% url 'listar_usuario' %}">
+            <button class="btn">Listar Usuarios</button>
+            </a>
+        </div>
+        <div class="setores">
+            <img class="img" src="../../static/images/setor.png" alt="">
+            <button class="btn"><a href="">Setores</a></button>
+        </div>
+        <div class="modulos">
+            <img class="img" src="../../static/images/modulo.png" alt="">
+            <button class="btn">Módulos</button>
+        </div>
+        <div class="treinamentos">
+            <img class="img" src="../../static/images/treinamento.jpg" alt="">
+            <button class="btn">Treinamentos</button>
+        </div>
+        <div class="conteudos">
+            <img class="img" src="../../static/images/conteudo.png" alt="">
+            <button class="btn"><a href="">Conteúdos</a></button>
+        </div>
+    </div>
+    <div class="voltar">
+        <button class="btn"><a href="./portal_admin">VOLTAR</a></button>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', validaUsu);
+    </script>
+</body>
+</html>

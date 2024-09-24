@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuário</title>
+
+    <link rel="stylesheet" type="text/css" href="../../static/core/style_cadastro_usuario.css">  <!-- Ajuste para carregar o arquivo CSS no Django -->
+
+</head>
+<body>
+    
+    <div class="container">
+        <h2>Cadastro de Usuário</h2>
+        <h4>Cadastre um usuário:</h4>
+
+        <!-- O Django renderiza automaticamente o formulário -->
+        <form method="POST">
+            {% csrf_token %}  <!-- Token de segurança obrigatório no Django -->
+            {{ form.as_p }}  <!-- Renderiza todos os campos do formulário de maneira automática -->
+
+            <button type="submit">Cadastrar</button>
+        </form>
+
+        <!-- Exibe erros, se houver -->
+        <div class="error">
+            {% if form.errors %}
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+    <script src="../../static/js/script_cadastro_usuario.js"></script>  <!-- Ajuste para carregar o arquivo JS no Django -->
+
+</body>
+</html>

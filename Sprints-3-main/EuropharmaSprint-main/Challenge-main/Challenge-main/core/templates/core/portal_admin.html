@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'core/admin.css' %}">
+</head>
+<body>
+
+    <header>
+        <div class="hdr">
+            <div class="hdr_eur">
+                <img class="eur" src="../../static/images/europahma.png" alt="">
+            </div>
+            <div class="hdr_lgn">
+              
+                <img class="icon" src="../../static/images/user.png" alt="">
+                <p id="var_usu"></p>
+            </div>
+        </div>
+    </header>
+    <hr>
+    <h1> Portal Do Administrador</h1>
+
+    <div class="container">
+        <div class="cadastros">
+            <img class="img" src="../../static/images/cadastro.png" alt="">
+            <button class="btn"><a href="cadastro_geral">Cadastros</a> </button>
+        </div>
+        <div class="treinamentos">
+            <img class="img" src="../../static/images/treinamento.jpg" alt="">
+            <button class="btn"><a href="acervo_videos">Treinamentos</a></button>
+        </div>
+        <div class="faq">
+            <img class="img" src="../../static/images/faq.jpg" alt="">
+            <a href="{% url 'faq' %}">
+                <button class="btn">FAQ</button>
+            </a>
+        
+    </div>
+    <div class="voltar">
+        <button class="btn"><a href="login">VOLTAR</a></button>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', validaUsu);
+    </script>
+</body>
+</html>

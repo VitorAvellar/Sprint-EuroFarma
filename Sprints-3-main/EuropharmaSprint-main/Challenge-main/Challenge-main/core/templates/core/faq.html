@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" type="text/css" href="../../static/core/style_faq.css">
+
+  </head>
+  <body>
+
+    <h2>FAQ - Perguntas Frequentes</h2>
+    <div class="faq_perguntas">
+        <a href="{% url 'cadastro_pergunta' %}">
+          <button class="btn">Fazer uma pergunta</button>
+        </a>
+      </div>
+
+    <!-- Formulário de pesquisa -->
+    <form method="GET" action="{% url 'faq' %}">
+        <input type="text" name="q" value="{{ query }}" placeholder="Pesquisar por nome de usuário">
+        <button type="submit">Pesquisar</button>
+    </form>
+
+    <!-- Exibe as perguntas filtradas ou todas -->
+    <ul>
+        {% for pergunta in perguntas %}
+            <li>
+                <strong>{{ pergunta.tipo_pergunta.tipo }}</strong>: {{ pergunta.texto_pergunta }}
+                <br><em>Enviado por: {{ pergunta.usuario.username }} em {{ pergunta.data_criacao|date:"d/m/Y H:i" }}</em>
+                
+                <!-- Exibe respostas associadas à pergunta -->
+                <ul>
+                    <h3>Respostas:</h2>
+                    {% for resposta in pergunta.respostas.all %}
+                    
+                        <li>{{ resposta.texto_resposta }} <br></li>
+                    {% empty %}
+                        <li>Nenhuma resposta ainda.</li>
+                    {% endfor %}
+                </ul>
+
+                <!-- Formulário de resposta -->
+                <button class="btn" type="button" onclick="document.getElementById('respostaForm{{ pergunta.id }}').style.display='block'">Responder</button>
+                <div id="respostaForm{{ pergunta.id }}" style="display:none; margin-top: 10px;">
+                    <form method="POST" action="{% url 'faq' %}">
+                        {% csrf_token %}
+                        <textarea name="texto_resposta" rows="3" class="form-control" placeholder="Escreva sua resposta aqui..."></textarea>
+                        <input type="hidden" name="pergunta_id" value="{{ pergunta.id }}">
+                        <button class="btn" type="submit">Enviar Resposta</button>
+                    </form>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+    
+  </body>
+</html>

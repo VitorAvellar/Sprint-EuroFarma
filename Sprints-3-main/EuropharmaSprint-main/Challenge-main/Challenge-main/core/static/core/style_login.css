@@ -1,0 +1,76 @@
+body {
+    
+    margin: 0;
+    padding: 0;
+}
+
+.titulo{
+    text-align: center;
+}
+
+.ima{
+
+    border-style: solid;
+    border-bottom: 0;
+    border-top: 0;
+    border-left: 0;
+   padding-right: 10px;
+
+
+   width: 100%;
+   height: 100%;
+   margin-left: 10px;
+}
+
+.ima img{
+    border-style: solid;
+}
+/*.separator {
+    width: 2px;
+    background-color: #333;
+    height: 200px; Altura automática para preencher o espaço das divs
+}*/
+
+
+/*.container{
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: initial;
+    width: 100%;
+    height: 100%;
+
+}*/
+
+.container {
+    display: flex; /* Usado para alinhar divs horizontalmente */
+    width: 100%;
+    height: 100%;
+   
+}
+
+.container div{
+    align-items: center;
+    text-align: center;
+
+}
+
+.login label{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.form-group button{
+    margin-top: 10px;
+}
+.form-group button:hover{
+    background-color: #0072fd;
+
+}
+
+.login{
+    width: 100%;
+    height: 100%;
+    margin-right: 10px;
+}
+

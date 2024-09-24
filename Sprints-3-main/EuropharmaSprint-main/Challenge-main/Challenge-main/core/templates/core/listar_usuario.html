@@ -1,0 +1,33 @@
+<!-- core/listar_usuario.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Usuários</title>
+
+    <link rel="stylesheet" type="text/css" href="../../static/core/style_listar_usuario.css">  <!-- Ajuste para carregar o arquivo CSS no Django -->
+
+</head>
+<body>
+    <h1>Lista de Usuários</h1>
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Data de Registro</th>
+
+        </tr>
+        {% for usuario in usuarios %}
+        <tr>
+            <td>{{ usuario.username }}</td>
+            <td>{{ usuario.email }}</td>
+            <td>{{ usuario.date_joined }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">Nenhum usuário encontrado.</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
