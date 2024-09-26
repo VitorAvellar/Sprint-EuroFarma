@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cadastros Gerais</title>
 
     <link rel="stylesheet" type="text/css" href="{% static 'core/style_cad_geral.css' %}">
 </head>
@@ -38,15 +38,23 @@
         </div>
         <div class="setores">
             <img class="img" src="../../static/images/setor.png" alt="">
-            <button class="btn"><a href="">Setores</a></button>
+            <a href="{% url 'cadastrar_setores' %}">
+                <button class="btn">Cadastrar Setores</button>
+            </a>
+
+
+
         </div>
         <div class="modulos">
             <img class="img" src="../../static/images/modulo.png" alt="">
-            <button class="btn">Módulos</button>
+            <button class="btn">Cadastro de Módulos</button>
         </div>
         <div class="treinamentos">
             <img class="img" src="../../static/images/treinamento.jpg" alt="">
-            <button class="btn">Treinamentos</button>
+            <a href="{% url 'adicionar_video' %}">
+                <button class="btn">Cadastro de Treinamentos</button>
+            </a>
+           
         </div>
         <div class="conteudos">
             <img class="img" src="../../static/images/conteudo.png" alt="">

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Treinamentos</title>
 
     <link rel="stylesheet" type="text/css" href="{% static 'core/usrIni.css' %}">
 </head>
@@ -32,7 +32,9 @@
         </div>
         <div class="faq">
             <img class="img" src="../../static/images/faq.jpg" alt="">
-            <button class="btn">FAQ</button>
+            <a href="{% url 'faq' %}">
+                <button class="btn">FAQ</button>
+            </a>
         </div>
     </div>
     <div class="voltar">

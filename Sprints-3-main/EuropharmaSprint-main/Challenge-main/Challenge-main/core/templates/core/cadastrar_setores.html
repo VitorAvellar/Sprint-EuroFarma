@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Setores</title>
+
+    <link rel="stylesheet" type="text/css" href="../../static/core/style_cadastro_setores.css">
+</head>
+<body>
+    {% block content %}
+    <h1>Cadastrar Setor</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Cadastrar Setor</button>
+    </form>
+
+    <div class="mt-3">
+        <a href="{% url 'cadastro_geral' %}"><button class="btn">Voltar para o inicio</button></a>
+    </div> 
+    
+    {% endblock %}
+</body>
+</html>

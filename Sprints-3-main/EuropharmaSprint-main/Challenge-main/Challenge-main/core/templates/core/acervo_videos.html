@@ -1,49 +1,52 @@
-{% load static %}
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Acervo de Vídeos</title>
 
-    <link rel="stylesheet" type="text/css" href="{% static 'core/style_acervo_videos.css' %}">
+    <link rel="stylesheet" type="text/css" href="../../static/core/style_acervoDeVideos.css"> 
+
 </head>
 <body>
 
-    <header>
-        <div class="hdr">
-            <div class="hdr_eur">
-                <img class="eur" src="../../static/images/europahma.png" alt="">
-            </div>
-            <div class="hdr_lgn">
-                
-                <img class="icon" src="../../static/images/user.png" alt="">
-                <p id="var_usu"></p>
-            </div>
-        </div>
-    </header>
-    <hr>
-    <h1> Treinamentos</h1>
+    <h1 style="text-align: center;">Acervo de Vídeos</h1>
+
+    <!-- Filtro de setor -->
+    <form method="GET" action="{% url 'acervo_videos' %}">
+        <label for="setor">Filtrar por setor:</label>
+        <select name="setor" id="setor">
+            <option value="">Todos os setores</option>
+            {% for setor in setores %}  
+                <option value="{{ setor.id }}" {% if setor.id|stringformat:"s" == request.GET.setor %}selected{% endif %}>{{ setor.nome_setor }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Filtrar</button>
+    </form>
+
+    <h2>Lista de Vídeos</h2>
 
     <div class="video-container">
         {% for video in videos %}
-        <div class="video-item">
-            <iframe
-                src="https://www.youtube.com/embed/{{ video|slice:'32:43' }}"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-            </iframe>
-        </div>
+            <div class="video-item">
+                <h3>{{ video.nome_video }} - Setor: {{ video.setor.nome_setor }}</h3>
+                <p>{{ video.descricao }}</p>
+                
+                <!-- Exibe o vídeo usando um iframe -->
+                <iframe width="560" height="315" src="{{ video.url_video }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                <!-- Botão de deletar vídeo -->
+                <form method="POST" action="{% url 'deletar_video' video.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este vídeo?')">Deletar</button>
+                </form>
+            </div>
         {% endfor %}
     </div>
-    <div class="voltar">
-        <button class="btn"><a href="index">VOLTAR</a></button>
+
+    <div >
+        <a href="{% url 'index' %}">Voltar para o inicio</a>
     </div>
 
-    <script src="{% static 'js/script.js' %}"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', validaUsu);
-    </script>
 </body>
 </html>

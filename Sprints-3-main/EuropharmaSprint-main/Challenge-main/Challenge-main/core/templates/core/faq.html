@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-
+    <title>FAQ</title>
     <link rel="stylesheet" type="text/css" href="../../static/core/style_faq.css">
-
-  </head>
-  <body>
-
+</head>
+<body>
     <h2>FAQ - Perguntas Frequentes</h2>
     <div class="faq_perguntas">
         <a href="{% url 'cadastro_pergunta' %}">
-          <button class="btn">Fazer uma pergunta</button>
+            <button class="btn">Fazer uma pergunta</button>
         </a>
-      </div>
+    </div>
 
     <!-- Formulário de pesquisa -->
     <form method="GET" action="{% url 'faq' %}">
@@ -32,9 +29,8 @@
                 
                 <!-- Exibe respostas associadas à pergunta -->
                 <ul>
-                    <h3>Respostas:</h2>
+                    <h3>Respostas:</h3>
                     {% for resposta in pergunta.respostas.all %}
-                    
                         <li>{{ resposta.texto_resposta }} <br></li>
                     {% empty %}
                         <li>Nenhuma resposta ainda.</li>
@@ -51,9 +47,14 @@
                         <button class="btn" type="submit">Enviar Resposta</button>
                     </form>
                 </div>
+
+                <!-- Botão de deletar pergunta -->
+                <form method="POST" action="{% url 'deletar_pergunta' pergunta.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir esta pergunta?')">Deletar</button>
+                </form>
             </li>
         {% endfor %}
     </ul>
-    
-  </body>
+</body>
 </html>

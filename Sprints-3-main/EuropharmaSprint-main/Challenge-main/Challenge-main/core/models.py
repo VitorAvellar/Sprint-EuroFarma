@@ -27,6 +27,10 @@ class AcervoVideos(models.Model):
     url_video = models.URLField()
     data_publicacao = models.DateTimeField(default=timezone.now)
     treinamento = models.ForeignKey(Treinamentos, on_delete=models.SET_NULL, null=True)
+    setor = models.ForeignKey(Setores, on_delete=models.SET_NULL, null=True)  # Relaciona com o setor
+
+    def __str__(self):
+        return self.nome_video
 
 class TipoPergunta(models.Model):
     tipo = models.CharField(max_length=100)

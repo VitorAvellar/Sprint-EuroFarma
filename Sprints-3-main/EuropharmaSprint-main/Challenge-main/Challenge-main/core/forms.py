@@ -6,12 +6,16 @@ from .models import Clientes, Setores, AcervoVideos, Pergunta, TipoPergunta, Res
 
 class ClienteForm(UserCreationForm):
     nome = forms.CharField(max_length=255)
-    setor = forms.ModelChoiceField(queryset=Setores.objects.all())
+    setor = forms.ModelChoiceField(queryset=Setores.objects.all())  # Esse campo será atualizado dinamicamente
     data_de_nascimento = forms.DateField(widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control', 'format': '%Y-%m-%d'}))
 
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')
+
+    def __init__(self, *args, **kwargs):
+        super(ClienteForm, self).__init__(*args, **kwargs)
+        self.fields['setor'].queryset = Setores.objects.all()  # Atualiza os setores disponíveis
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -36,13 +40,18 @@ class ClienteForm(UserCreationForm):
 class AcervoVideoForm(forms.ModelForm):
     class Meta:
         model = AcervoVideos
-        exclude = ()
+        exclude = ('treinamento',)
 
         widgets = {
             'nome_video': forms.TextInput(attrs={'class': 'form-control', 'autofocus': ''}),
             'url_video': forms.URLInput(attrs={'class': 'form-control'}),
             'descricao': forms.TextInput(attrs={'class': 'form-control'}),
+            'setor': forms.Select(attrs={'class': 'form-control'})  # Campo de escolha de setor
         }
+
+    def __init__(self, *args, **kwargs):
+        super(AcervoVideoForm, self).__init__(*args, **kwargs)
+        self.fields['setor'].queryset = Setores.objects.all() 
 
 
 class PerguntaForm(forms.ModelForm):
@@ -68,4 +77,13 @@ class RespostaForm(forms.ModelForm):
         fields = ['texto_resposta']  
         widgets = {
             'texto_resposta': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+        }
+
+
+class SetorForm(forms.ModelForm):
+    class Meta:
+        model = Setores
+        fields = ['nome_setor']
+        widgets = {
+            'nome_setor': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome do Setor'}),
         }

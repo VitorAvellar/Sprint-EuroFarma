@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Vídeo</title>
+    <link rel="stylesheet" type="text/css" href="../../static/core/style_cadastro_videos.css">
+</head>
+<body>
+
+    <h1>Adicionar Novo Vídeo</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Adicionar</button>
+    </form>
+
+    <div class="voltar">
+        <a href="{% url 'acervo_videos' %}">Voltar para o Acervo</a>
+    </div>
+
+    <div class="voltar">
+        <a href="{% url 'cadastro_geral' %}">Voltar para inicio</a>
+    </div> 
+
+</body>
+</html>

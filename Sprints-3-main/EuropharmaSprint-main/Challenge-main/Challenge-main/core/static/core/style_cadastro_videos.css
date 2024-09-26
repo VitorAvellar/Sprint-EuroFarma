@@ -1,0 +1,87 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 2.5em;
+}
+
+/* Estilo do formulário */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo dos campos */
+form input[type="text"], 
+form input[type="url"], 
+form textarea, 
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+}
+
+form input[type="text"]:focus, 
+form input[type="url"]:focus, 
+form textarea:focus, 
+form select:focus {
+    border-color: #1d76c5;
+}
+
+/* Estilo do botão */
+form button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #1d76c5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button[type="submit"]:hover {
+    background-color: #0b39c4;
+}
+
+/* Link de voltar */
+.voltar {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.voltar a {
+    text-decoration: none;
+    background-color: #1d76c5;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.voltar a:hover {
+    background-color: #0b39c4;
+}

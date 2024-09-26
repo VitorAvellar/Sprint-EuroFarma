@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
-from .forms import ClienteForm, PerguntaForm, RespostaForm
-from .models import AcervoVideos, Pergunta, Resposta
+from .forms import ClienteForm, PerguntaForm, RespostaForm, AcervoVideoForm, SetorForm
+from .models import AcervoVideos, Pergunta, Resposta, AcervoVideos, Setores
 
 
 def index(request):
@@ -118,3 +118,61 @@ def faq(request):
         form = RespostaForm()
 
     return render(request, 'core/faq.html', {'perguntas': perguntas, 'form': form})
+
+def acervo_videos(request):
+    # Obtenha o valor do setor filtrado da URL (se houver)
+    setor_id = request.GET.get('setor')
+
+    if setor_id:
+        # Se um setor foi selecionado, filtre os vídeos por esse setor
+        videos = AcervoVideos.objects.filter(setor_id=setor_id)
+    else:
+        # Caso contrário, exiba todos os vídeos
+        videos = AcervoVideos.objects.all()
+
+    # Pega todos os setores para popular o dropdown
+    setores = Setores.objects.all()
+
+    # Renderiza o template com os vídeos e os setores disponíveis para filtro
+    return render(request, 'core/acervo_videos.html', {'videos': videos, 'setores': setores})
+
+def adicionar_video(request):
+    if request.method == 'POST':
+        form = AcervoVideoForm(request.POST)
+        if form.is_valid():
+            form.save()  # Salva o vídeo no banco de dados
+            return redirect('acervo_videos')
+    else:
+        form = AcervoVideoForm()
+
+    return render(request, 'core/adicionar_video.html', {'form': form})
+
+def cadastrar_setores(request):
+    return render(request, 'core/cadastrar_setores.html')
+
+def cadastrar_setores(request):
+    if request.method == 'POST':
+        form = SetorForm(request.POST)
+        if form.is_valid():
+            form.save()  # Salva o novo setor no banco de dados
+            return redirect('cadastrar_setores')
+    else:
+        form = SetorForm()
+    
+    return render(request, 'core/cadastrar_setores.html', {'form': form})
+
+def deletar_usuario(request, usuario_id):
+    usuario = get_object_or_404(User, id=usuario_id)
+    usuario.delete()  
+    return redirect('listar_usuario')  
+
+def deletar_video(request, video_id):
+    video = get_object_or_404(AcervoVideos, id=video_id)
+    video.delete()  # Exclui o vídeo do banco de dados
+    return redirect('acervo_videos')  # Redireciona para a lista de vídeos
+
+
+def deletar_pergunta(request, pergunta_id):
+    pergunta = get_object_or_404(Pergunta, id=pergunta_id)
+    pergunta.delete()  # Exclui a pergunta do banco de dados
+    return redirect('faq')  # Redireciona para a lista de perguntas no FAQ
