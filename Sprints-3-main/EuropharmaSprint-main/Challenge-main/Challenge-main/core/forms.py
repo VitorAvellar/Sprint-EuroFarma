@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Clientes, Setores, AcervoVideos, Pergunta, TipoPergunta, Resposta
+from .models import Clientes, Setores, AcervoVideos, Pergunta, TipoPergunta, Resposta, Modulos
 
 
 class ClienteForm(UserCreationForm):
@@ -46,12 +46,15 @@ class AcervoVideoForm(forms.ModelForm):
             'nome_video': forms.TextInput(attrs={'class': 'form-control', 'autofocus': ''}),
             'url_video': forms.URLInput(attrs={'class': 'form-control'}),
             'descricao': forms.TextInput(attrs={'class': 'form-control'}),
-            'setor': forms.Select(attrs={'class': 'form-control'})  # Campo de escolha de setor
+            'setor': forms.Select(attrs={'class': 'form-control'}),
+            'modulo': forms.Select(attrs={'class': 'form-control'})  # Campo de escolha de módulo
         }
 
     def __init__(self, *args, **kwargs):
         super(AcervoVideoForm, self).__init__(*args, **kwargs)
-        self.fields['setor'].queryset = Setores.objects.all() 
+        self.fields['setor'].queryset = Setores.objects.all()
+        self.fields['modulo'].queryset = Modulos.objects.all()  # Adiciona os módulos disponíveis
+
 
 
 class PerguntaForm(forms.ModelForm):
@@ -86,4 +89,12 @@ class SetorForm(forms.ModelForm):
         fields = ['nome_setor']
         widgets = {
             'nome_setor': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome do Setor'}),
+        }
+
+class ModuloForm(forms.ModelForm):
+    class Meta:
+        model = Modulos
+        fields = ['nome_modulo']
+        widgets = {
+            'nome_modulo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome do Módulo'}),
         }

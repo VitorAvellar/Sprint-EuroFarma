@@ -2,12 +2,17 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
-
 class Setores(models.Model):
     nome_setor = models.CharField(max_length=100)
 
     def __str__(self):
         return self.nome_setor
+
+class Modulos(models.Model):
+    nome_modulo = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.nome_modulo
 
 class Clientes(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name="cliente", null=True)
@@ -26,7 +31,7 @@ class AcervoVideos(models.Model):
     descricao = models.TextField()
     url_video = models.URLField()
     data_publicacao = models.DateTimeField(default=timezone.now)
-    treinamento = models.ForeignKey(Treinamentos, on_delete=models.SET_NULL, null=True)
+    modulo = models.ForeignKey(Modulos, on_delete=models.SET_NULL, null=True)  # Relaciona com o módulo
     setor = models.ForeignKey(Setores, on_delete=models.SET_NULL, null=True)  # Relaciona com o setor
 
     def __str__(self):
@@ -55,4 +60,3 @@ class Resposta(models.Model):
 
     def __str__(self):
         return self.texto_resposta
-

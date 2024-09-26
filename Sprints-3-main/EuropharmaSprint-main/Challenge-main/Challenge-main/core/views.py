@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
-from .forms import ClienteForm, PerguntaForm, RespostaForm, AcervoVideoForm, SetorForm
-from .models import AcervoVideos, Pergunta, Resposta, AcervoVideos, Setores
+from .forms import ClienteForm, PerguntaForm, RespostaForm, AcervoVideoForm, SetorForm, ModuloForm  # Importando de forms.py
+from .models import AcervoVideos, Pergunta, Resposta, Setores, Modulos
 
 
 def index(request):
@@ -147,6 +147,7 @@ def adicionar_video(request):
 
     return render(request, 'core/adicionar_video.html', {'form': form})
 
+
 def cadastrar_setores(request):
     return render(request, 'core/cadastrar_setores.html')
 
@@ -176,3 +177,15 @@ def deletar_pergunta(request, pergunta_id):
     pergunta = get_object_or_404(Pergunta, id=pergunta_id)
     pergunta.delete()  # Exclui a pergunta do banco de dados
     return redirect('faq')  # Redireciona para a lista de perguntas no FAQ
+
+def cadastrar_modulos(request):
+    if request.method == 'POST':
+        form = ModuloForm(request.POST)
+        if form.is_valid():
+            form.save()  # Salva o novo módulo no banco de dados
+            return redirect('cadastrar_modulos')
+    else:
+        form = ModuloForm()
+    
+    return render(request, 'core/cadastrar_modulos.html', {'form': form})
+

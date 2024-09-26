@@ -20,5 +20,7 @@ urlpatterns = [
     path('deletar_pergunta/<int:pergunta_id>/', views.deletar_pergunta, name='deletar_pergunta'),
     path('adicionar_video', views.adicionar_video, name='adicionar_video'),
     path('cadastrar_setores/', views.cadastrar_setores, name='cadastrar_setores'),
+    path('cadastrar_modulos/', views.cadastrar_modulos, name='cadastrar_modulos'),
+
 
 ]
