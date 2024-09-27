@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem de Setores</title>
+</head>
+<body>
+    
+
+    {% block content %}
+        <h2>Setores Cadastrados</h2>
+    
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome do Setor</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for setor in setores %}
+                    <tr>
+                        <td>{{ setor.nome_setor }}</td>
+                        <td>
+                            <form action="{% url 'deletar_setor' setor.id %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Deletar</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="mt-3">
+            <a href="{% url 'cadastrar_setores' %}" class="btn"><button>voltar</button></a>
+        </div> 
+        <br>
+        <div class="mt-3">
+            <a href="{% url 'cadastro_geral' %}" class="btn"><button>Voltar para o inicio</button></a>
+        </div> 
+    
+       
+    {% endblock %}
+    
+
+</body>
+</html>

@@ -236,3 +236,11 @@ def deletar_material(request, material_id):
     # return render(request, 'confirm_delete.html', {'material': material})
  
 
+def listar_setores(request):
+    setores = Setores.objects.all()  # Obtém todos os setores cadastrados
+    return render(request, 'core/listar_setores.html', {'setores': setores})
+
+def deletar_setor(request, setor_id):
+    setor = get_object_or_404(Setores, id=setor_id)
+    setor.delete()  # Deleta o setor do banco de dados
+    return redirect('listar_setores')  # Redireciona para a página de listagem dos setores

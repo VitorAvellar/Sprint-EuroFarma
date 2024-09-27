@@ -26,4 +26,6 @@ urlpatterns = [
     path('listar_material/', views.listar_material, name='listar_material'),
     path('download/<int:material_id>/', views.download_document, name='download_document'),
     path('deletar_material/<int:material_id>/', views.deletar_material, name='deletar_material'),
+    path('listar_setores/', views.listar_setores, name='listar_setores'),
+    path('deletar_setor/<int:setor_id>/', views.deletar_setor, name='deletar_setor'),
 ]
