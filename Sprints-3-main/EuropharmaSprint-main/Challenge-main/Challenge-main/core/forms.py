@@ -47,13 +47,13 @@ class AcervoVideoForm(forms.ModelForm):
             'url_video': forms.URLInput(attrs={'class': 'form-control'}),
             'descricao': forms.TextInput(attrs={'class': 'form-control'}),
             'setor': forms.Select(attrs={'class': 'form-control'}),
-            'modulo': forms.Select(attrs={'class': 'form-control'})  # Campo de escolha de módulo
+           
         }
 
     def __init__(self, *args, **kwargs):
         super(AcervoVideoForm, self).__init__(*args, **kwargs)
         self.fields['setor'].queryset = Setores.objects.all()
-        self.fields['modulo'].queryset = Modulos.objects.all()  # Adiciona os módulos disponíveis
+        # Adiciona os módulos disponíveis
 
 
 

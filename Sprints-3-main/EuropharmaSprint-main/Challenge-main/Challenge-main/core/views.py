@@ -149,10 +149,6 @@ def adicionar_video(request):
 
     return render(request, 'core/adicionar_video.html', {'form': form})
 
-
-# def cadastrar_setores(request):
-#     return render(request, 'core/cadastrar_setores.html')
-
 def cadastrar_setores(request):
     if request.method == 'POST':
         form = SetorForm(request.POST)

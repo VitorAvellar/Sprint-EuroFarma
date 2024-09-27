@@ -31,7 +31,7 @@ class AcervoVideos(models.Model):
     descricao = models.TextField()
     url_video = models.URLField()
     data_publicacao = models.DateTimeField(default=timezone.now)
-    modulo = models.ForeignKey(Modulos, on_delete=models.SET_NULL, null=True)  # Relaciona com o módulo
+    
     setor = models.ForeignKey(Setores, on_delete=models.SET_NULL, null=True)  # Relaciona com o setor
 
     def __str__(self):

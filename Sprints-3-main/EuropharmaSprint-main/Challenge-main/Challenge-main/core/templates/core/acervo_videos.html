@@ -29,7 +29,7 @@
     <div class="video-container">
         {% for video in videos %}
             <div class="video-item">
-                <h3>{{ video.nome_video }} - Setor: {{ video.setor.nome_setor }} - Módulo: {{ video.modulo.nome_modulo }} </h3>
+                <h3>Nome: {{ video.nome_video }} - Setor: {{ video.setor.nome_setor }} </h3>
                 <p>{{ video.descricao }}</p>
                 
                 <!-- Exibe o vídeo usando um iframe -->
