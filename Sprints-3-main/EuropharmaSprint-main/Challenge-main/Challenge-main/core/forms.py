@@ -102,4 +102,4 @@ class ModuloForm(forms.ModelForm):
 class MaterialForm(forms.ModelForm):
     class Meta:
         model = Material
-        fields = ['title', 'file']
+        fields = ['title', 'file', 'modulo']

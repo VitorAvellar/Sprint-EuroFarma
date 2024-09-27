@@ -64,6 +64,8 @@ class Resposta(models.Model):
 class Material(models.Model):
     title = models.CharField(max_length=255)
     file = models.FileField(upload_to='core/')
+    modulo = models.ForeignKey(Modulos, on_delete=models.CASCADE, null=True, blank=True)
+
 
     def __str__(self):
         return self.title
