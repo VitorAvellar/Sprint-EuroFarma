@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
-from .forms import ClienteForm, PerguntaForm, RespostaForm, AcervoVideoForm, SetorForm, ModuloForm  # Importando de forms.py
-from .models import AcervoVideos, Pergunta, Resposta, Setores, Modulos
+from .forms import ClienteForm, MaterialForm, PerguntaForm, RespostaForm, AcervoVideoForm, SetorForm, ModuloForm  # Importando de forms.py
+from .models import AcervoVideos, Pergunta, Resposta, Setores, Modulos, Material
+from django.http import HttpResponse, Http404
+import mimetypes
 
 
 def index(request):
@@ -188,4 +190,49 @@ def cadastrar_modulos(request):
         form = ModuloForm()
     
     return render(request, 'core/cadastrar_modulos.html', {'form': form})
+
+# Metodo responsavel por realizar o upload e cadastro dos arquivo
+def cadastro_material(request):
+    if request.method == 'POST':
+        form = MaterialForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+           
+    else:
+        form = MaterialForm()
+    return render(request, 'core/cadastro_material.html', {'form': form})
+
+# Metodo responsavel por Listar o arquivo
+def listar_material(request):
+    material = Material.objects.all()
+    return render(request, 'core/listar_material.html', {'material': material})
+
+# Metodo responsavel por realizar o download dos arquivo
+def download_document(request, material_id):
+    try:
+        material = Material.objects.get(id=material_id)
+
+    # Utilizando o import da  mimetypes com o objetivo de identificar automaticamente qual a exteção do arquivo
+        file_path = material.file.path
+        content_type, encoding = mimetypes.guess_type(file_path)
+
+        if content_type is None:
+            content_type = 'application/octet-stream'  # Tipo genérico para arquivos binários
+
+        # Informando ao HTTP qual o tipo do arquivo que ira ser armazenado
+        response = HttpResponse(material.file, content_type=content_type )  
+        response['Content-Disposition'] = f'attachment; filename="{material.file.name}"'
+        return response 
+    except material.DoesNotExist:
+        raise Http404("Documento não encontrado.")
+    
+def deletar_material(request, material_id):
+    material = get_object_or_404(Material, id=material_id)
+    
+    if request.method == 'POST':
+        material.delete()
+        return redirect('listar_material')  # Redireciona para a página de listagem após a exclusão
+    
+    # return render(request, 'confirm_delete.html', {'material': material})
+ 
 

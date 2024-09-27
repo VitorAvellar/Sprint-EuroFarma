@@ -21,6 +21,8 @@ urlpatterns = [
     path('adicionar_video', views.adicionar_video, name='adicionar_video'),
     path('cadastrar_setores/', views.cadastrar_setores, name='cadastrar_setores'),
     path('cadastrar_modulos/', views.cadastrar_modulos, name='cadastrar_modulos'),
-
-
+    path('cadastro_material/', views.cadastro_material, name='cadastro_material'),
+    path('listar_material/', views.listar_material, name='listar_material'),
+    path('download/<int:material_id>/', views.download_document, name='download_document'),
+    path('deletar_material/<int:material_id>/', views.deletar_material, name='deletar_material'),
 ]

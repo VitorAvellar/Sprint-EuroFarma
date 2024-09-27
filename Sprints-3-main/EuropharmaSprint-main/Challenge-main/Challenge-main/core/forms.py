@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Clientes, Setores, AcervoVideos, Pergunta, TipoPergunta, Resposta, Modulos
+from .models import Clientes, Setores, AcervoVideos, Pergunta, TipoPergunta, Resposta, Modulos, Material
 
 
 class ClienteForm(UserCreationForm):
@@ -98,3 +98,8 @@ class ModuloForm(forms.ModelForm):
         widgets = {
             'nome_modulo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome do Módulo'}),
         }
+
+class MaterialForm(forms.ModelForm):
+    class Meta:
+        model = Material
+        fields = ['title', 'file']

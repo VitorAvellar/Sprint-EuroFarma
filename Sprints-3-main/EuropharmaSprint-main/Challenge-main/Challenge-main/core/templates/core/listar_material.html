@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Documentos</title>
+</head>
+<body>
+  <h1>Lista de Documentos</h1>
+    <ul>
+        {% for material in material %}
+            <li>
+                <a href="{% url 'download_document' material.id %}">{{ material.title }} {{ material.file.name|slice:"-4:" }}</a>
+            </li>
+             <!-- Botão de Exclusão -->
+             <form action="{% url 'deletar_material' material.id %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" onclick="return confirm('Tem certeza que deseja excluir este documento?');">Excluir</button>
+            </form>
+        {% empty %}
+            <li>Nenhum documento encontrado.</li>
+        {% endfor %}
+    </ul>
+
+    <button ><a href="{% url 'cadastro_material' %}"> Voltar </a></button>
+    <button ><a href="{% url 'cadastro_geral' %}"> Retornar a tela de cadastros gerais </a></button>
+   </body>
+</html>

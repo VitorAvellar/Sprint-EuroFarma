@@ -60,3 +60,10 @@ class Resposta(models.Model):
 
     def __str__(self):
         return self.texto_resposta
+    
+class Material(models.Model):
+    title = models.CharField(max_length=255)
+    file = models.FileField(upload_to='core/')
+
+    def __str__(self):
+        return self.title
