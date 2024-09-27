@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nome do Treinamento - Materiais de Apoio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Botão de menu -->
+    <div class="open-sidebar" onclick="toggleSidebar()">&#9776;</div>
+
+    <!-- Menu deslizante -->
+    <div id="sidebar" class="sidebar">
+        <!-- Botão para fechar o menu -->
+        <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">&times;</a>
+
+        <!-- Conteúdo do menu -->
+        <div class="menu-title">Nome do Treinamento</div>
+        <div class="submenu-title">Nome do Primeiro Módulo</div>
+        <a href="#" class="submenu-item">Aulas</a>
+        <a href="#" class="submenu-item">Materiais</a>
+        <a href="#" class="submenu-item">Exercícios</a>
+        
+        <div class="submenu-title">Nome do Segundo Módulo</div>
+        <a href="#" class="submenu-item">Aulas</a>
+        <a href="#" class="submenu-item">Materiais</a>
+    </div>
+    <div class="header">
+        <span>👥 Nome_Grupo</span>
+        &emsp;
+        <span>👤 Nome_usuario</span>
+    </div>
+    <div class="container text-center">
+        <!-- Nome do Treinamento -->
+        <h2 class="mt-5">Nome do Treinamento</h2>
+        <h5>Materiais de Apoio</h5>
+
+        <!-- Grid de Materiais -->
+        <div class="row mt-4">
+            <div class="col-md-5 text-start">
+                <p style="font-weight: 500;">Descrição: <a href="#" class="material-link">LoremIpsum.pdf</a></p>
+                <p style="font-weight: 500;">Descrição: <a href="#" class="material-link">LoremIpsum.docs</a></p>
+                <p style="font-weight: 500;">Descrição: <a href="#" class="material-link">LoremIpsum.png</a></p>
+                <p style="font-weight: 500;">Descrição: <a href="#" class="material-link">LoremIpsum.img</a></p>
+            </div>
+
+            <!-- Divider (linha vertical) -->
+            <div class="col-md-2 d-flex justify-content-center align-items-center">
+                <div class="divider-line"></div>
+            </div>
+
+            <div class="col-md-5 text-start">
+                <p style="font-weight: 500;">Descrição: <a href="#" class="material-link">LoremIpsum.java</a></p>
+                <p style="font-weight: 500;">Descrição: <a href="#" class="material-link">LoremIpsum.html</a></p>
+                <p style="font-weight: 500;">Descrição: <a href="#" class="material-link">LoremIpsum.pdf</a></p>
+                <p style="font-weight: 500;">Descrição: <a href="#" class="material-link">LoremIpsum.pdf</a></p>
+            </div>
+        </div>
+
+        <!-- Botão Voltar -->
+        <button class="btn btn-custom back-button">Voltar</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Função para abrir e fechar o menu
+        function toggleSidebar() {
+            document.getElementById("sidebar").classList.toggle("active");
+        }
+    </script>
+</body>
+</html>
