@@ -10,14 +10,39 @@
 </head>
 <body>
 
-    <h1 style="text-align: center;">Acervo de Vídeos</h1>
+    <!-- Botão de menu -->
+    <div class="open-sidebar" onclick="toggleSidebar()">&#9776;</div>
+
+    <!-- Menu deslizante -->
+    <div id="sidebar" class="sidebar">
+        <!-- Botão para fechar o menu -->
+        <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">&times;</a>
+
+        <!-- Conteúdo do menu -->
+        <div class="menu-title">Nome do Treinamento</div>
+        <div class="submenu-title">Nome do Primeiro Módulo</div>
+        <a href="#" class="submenu-item">Aulas</a>
+        <a href="#" class="submenu-item">Materiais</a>
+        <a href="#" class="submenu-item">Exercícios</a>
+        
+        <div class="submenu-title">Nome do Segundo Módulo</div>
+        <a href="#" class="submenu-item">Aulas</a>
+        <a href="#" class="submenu-item">Materiais</a>
+    </div>
+
+    <div class="header">
+        &emsp;
+        <span>👤 Nome_user___</span>
+    </div>
+
+    <h1 style="text-align: center; margin-top: 80px;">Acervo de Vídeos</h1>
 
     <!-- Filtro de setor -->
     <form method="GET" action="{% url 'acervo_videos' %}">
         <label for="setor">Filtrar por setor:</label>
-        <select name="setor" id="setor">
+        <select name="setor" id="setor" style="width: 20%;">
             <option value="">Todos os setores</option>
-            {% for setor in setores %}  
+            {% for setor in setores %}
                 <option value="{{ setor.id }}" {% if setor.id|stringformat:"s" == request.GET.setor %}selected{% endif %}>{{ setor.nome_setor }}</option>
             {% endfor %}
         </select>
@@ -38,15 +63,23 @@
                 <!-- Botão de deletar vídeo -->
                 <form method="POST" action="{% url 'deletar_video' video.id %}" style="display:inline;">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este vídeo?')">Deletar</button>
+                    <button type="submit" class="btn" onclick="return confirm('Tem certeza que deseja excluir este vídeo?')">Deletar</button>
                 </form>
             </div>
         {% endfor %}
     </div>
 
     <div >
-        <a href="{% url 'index' %}">Voltar para o inicio</a>
+        <button class="btn"><a href="{% url 'index' %}">Voltar para o inicio</a></button>
+        
     </div>
+
+    <script>
+        // Função para abrir e fechar o menu
+        function toggleSidebar() {
+            document.getElementById("sidebar").classList.toggle("active");
+        }
+    </script>
 
 </body>
 </html>

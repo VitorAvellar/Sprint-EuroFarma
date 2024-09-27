@@ -7,7 +7,8 @@
     <link rel="stylesheet" type="text/css" href="../../static/core/style_faq.css">
 </head>
 <body>
-    <h2>FAQ - Perguntas Frequentes</h2>
+    <h1 class="title">FAQ </h1>
+    <h4 class="title_desq">Perguntas Frequentes</h4>
     <div class="faq_perguntas">
         <a href="{% url 'cadastro_pergunta' %}">
             <button class="btn">Fazer uma pergunta</button>
@@ -15,8 +16,8 @@
     </div>
 
     <!-- Formulário de pesquisa -->
-    <form method="GET" action="{% url 'faq' %}">
-        <input type="text" name="q" value="{{ query }}" placeholder="Pesquisar por nome de usuário">
+    <form method="GET" action="{% url 'faq' %}" class="form-pesquisa">
+        <input type="text" name="q" value="{{ query }}" placeholder="Pesquisar por username">
         <button type="submit">Pesquisar</button>
     </form>
 
@@ -44,7 +45,7 @@
                         {% csrf_token %}
                         <textarea name="texto_resposta" rows="3" class="form-control" placeholder="Escreva sua resposta aqui..."></textarea>
                         <input type="hidden" name="pergunta_id" value="{{ pergunta.id }}">
-                        <button class="btn" type="submit">Enviar Resposta</button>
+                        <button class="btn" type="submit" style="width: 55px; height: 36px; border-radius: 3px; font-size: 13px;" >Enviar</button>
                     </form>
                 </div>
 

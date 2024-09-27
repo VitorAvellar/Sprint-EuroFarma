@@ -1,7 +1,10 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+body{
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
+
 
 h1, h2 {
     text-align: center;
@@ -24,17 +27,21 @@ select {
     border-radius: 5px;
 }
 
-button[type="submit"] {
-    background-color: #2c62ea;
-    color: #fff;
-    padding: 10px 20px;
+.btn{
+    margin-top: 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10em;
+    font-size: x-large;
+}
+.btn a{
+    text-decoration: none;
+    color: inherit;
+    background: none;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
-button[type="submit"]:hover {
-    background-color: #1d1390;
+.btn:hover{
+    background-color: #03358E;
 }
 
 .video-container {
@@ -83,18 +90,92 @@ button[type="submit"]:hover {
 
 div {
     text-align: center;
-    margin-top: 20px;
 }
 
-a {
-    background-color: #2c62ea;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
+/* Estilos do menu deslizante */
+.sidebar {
+    height: 100%;
+    width: 260px;
+    position: fixed;
+    top: 0;
+    left: -260px;
+    background-color: #f8f9fa;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 20px;
+    z-index: 1000;
+    
+}
+
+.sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: rgb(221, 221, 221);
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: #646464;
+}
+
+.sidebar .closebtn {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 30px;
+    margin-left: 50px;
+}
+
+.open-sidebar {
+    font-size: 30px;
     cursor: pointer;
+    position: fixed;
+    top: 3px;
+    left: 10px;
+    z-index: 1001;
 }
 
-a:hover {
-    background-color: #1d1390;
+/* Estilos específicos dos módulos */
+.menu-title {
+    background-color: #003366;
+    color: rgb(219, 219, 219);
+    padding: 10px;
+    font-weight: bold;
+}
+
+.submenu-title {
+    background-color: #292929;
+    color: rgb(209, 209, 209);
+    padding: 10px;
+    font-size: 17px;
+}
+
+.submenu-item {
+    background-color: #003366;
+    color: rgb(192, 192, 192);
+    padding: 10px;
+    font-size: 10px;
+}
+
+/* Para exibir o menu */
+#sidebar.active {
+    left: 0;
+}
+
+.question-status {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 10px;
+    text-align: end;
+    border-bottom: 2px solid #ccc;
+    background: #f8f9fa;
 }

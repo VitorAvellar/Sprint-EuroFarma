@@ -6,7 +6,7 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     background-color: #f4f4f4;
     color: #333;
     padding: 20px;
@@ -63,18 +63,24 @@ textarea:focus {
 .btn {
     display: inline-block;
     padding: 10px 15px;
-    background-color: #0044ff;
-    color: white;
-    border: none;
-    border-radius: 4px;
     cursor: pointer;
     text-align: center;
     text-decoration: none;
-    font-size: 16px;
-    transition: background-color 0.3s;
+    font-size: medium;
+    font-weight: 600;
+    margin-top: 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10em;
 }
 
-/* Efeito ao passar o mouse sobre o botão */
-.btn:hover {
-    background-color: #0056b3;
+.btn a{
+    text-decoration: none;
+    color: inherit;
+    background: none;
+    border: none;
+}
+
+
+.btn:hover{
+    background-color: #003fac;
 }
