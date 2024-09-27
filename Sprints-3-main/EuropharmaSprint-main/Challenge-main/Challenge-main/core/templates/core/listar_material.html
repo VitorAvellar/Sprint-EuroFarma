@@ -5,14 +5,30 @@
     <title>Lista de Documentos</title>
 </head>
 <body>
-  <h1>Lista de Documentos</h1>
+    <h1>Lista de Documentos</h1>
+
+    <!-- Filtro por Módulo -->
+    <form method="GET">
+        <select name="modulo">
+            <option value="">Todos os Módulos</option>
+            {% for modulo in modulos %}
+                <option value="{{ modulo.id }}" {% if modulo.id|stringformat:"d" == request.GET.modulo %}selected{% endif %}>
+                    {{ modulo.nome_modulo }}
+                </option>
+            {% endfor %}
+        </select>
+        <button type="submit">Filtrar</button>
+    </form>
+
+    <!-- Lista de Documentos -->
     <ul>
         {% for material in material %}
             <li>
-                <a href="{% url 'download_document' material.id %}">{{ material.title }} {{ material.file.name|slice:"-4:" }}</a>
+                <!-- Nome do Material com Módulo -->
+                <a href="{% url 'download_document' material.id %}">{{ material.title }} ({{ material.modulo.nome_modulo }}) {{ material.file.name|slice:"-4:" }}</a>
             </li>
-             <!-- Botão de Exclusão -->
-             <form action="{% url 'deletar_material' material.id %}" method="post" style="display:inline;">
+            <!-- Botão de Exclusão -->
+            <form action="{% url 'deletar_material' material.id %}" method="post" style="display:inline;">
                 {% csrf_token %}
                 <button type="submit" onclick="return confirm('Tem certeza que deseja excluir este documento?');">Excluir</button>
             </form>
@@ -21,7 +37,8 @@
         {% endfor %}
     </ul>
 
-    <button ><a href="{% url 'cadastro_material' %}"> Voltar </a></button>
-    <button ><a href="{% url 'cadastro_geral' %}"> Retornar a tela de cadastros gerais </a></button>
-   </body>
+    <!-- Botões de Navegação -->
+    <button><a href="{% url 'cadastro_material' %}">Voltar</a></button>
+    <button><a href="{% url 'cadastro_geral' %}">Retornar à tela de cadastros gerais</a></button>
+</body>
 </html>

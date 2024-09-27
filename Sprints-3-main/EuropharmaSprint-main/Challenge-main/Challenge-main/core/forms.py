@@ -103,3 +103,12 @@ class MaterialForm(forms.ModelForm):
     class Meta:
         model = Material
         fields = ['title', 'file', 'modulo']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Título do Material'}),
+            'file': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'modulo': forms.Select(attrs={'class': 'form-control'})  # Campo de escolha de módulo
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(MaterialForm, self).__init__(*args, **kwargs)
+        self.fields['modulo'].queryset = Modulos.objects.all()  # Adiciona os módulos disponíveis

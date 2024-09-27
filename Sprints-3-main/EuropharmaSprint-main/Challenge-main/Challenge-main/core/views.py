@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
-from .forms import ClienteForm, MaterialForm, PerguntaForm, RespostaForm, AcervoVideoForm, SetorForm, ModuloForm  # Importando de forms.py
+from .forms import ClienteForm, MaterialForm, PerguntaForm, RespostaForm, AcervoVideoForm, SetorForm, ModuloForm
 from .models import AcervoVideos, Pergunta, Resposta, Setores, Modulos, Material
 from django.http import HttpResponse, Http404
 import mimetypes
@@ -150,8 +150,8 @@ def adicionar_video(request):
     return render(request, 'core/adicionar_video.html', {'form': form})
 
 
-def cadastrar_setores(request):
-    return render(request, 'core/cadastrar_setores.html')
+# def cadastrar_setores(request):
+#     return render(request, 'core/cadastrar_setores.html')
 
 def cadastrar_setores(request):
     if request.method == 'POST':
@@ -197,15 +197,28 @@ def cadastro_material(request):
         form = MaterialForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-           
+            return redirect('listar_material')
     else:
         form = MaterialForm()
+    
     return render(request, 'core/cadastro_material.html', {'form': form})
 
 # Metodo responsavel por Listar o arquivo
 def listar_material(request):
-    material = Material.objects.all()
-    return render(request, 'core/listar_material.html', {'material': material})
+    # Obtém o valor do módulo filtrado da URL (se houver)
+    modulo_id = request.GET.get('modulo')
+
+    if modulo_id:
+        # Se um módulo foi selecionado, filtre os materiais por esse módulo
+        material = Material.objects.filter(modulo_id=modulo_id).select_related('modulo')
+    else:
+        # Caso contrário, exiba todos os materiais
+        material = Material.objects.all().select_related('modulo')
+
+    # Pega todos os módulos para popular o dropdown
+    modulos = Modulos.objects.all()
+
+    return render(request, 'core/listar_material.html', {'material': material, 'modulos': modulos})
 
 # Metodo responsavel por realizar o download dos arquivo
 def download_document(request, material_id):

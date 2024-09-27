@@ -1,94 +1,98 @@
-  <!DOCTYPE html>
-  <html lang="pt-BR">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Upload de Arquivo</title>
-      <style>
-          .drag-area {
-              border: 2px dashed #ccc;
-              border-radius: 10px;
-              width: 100%;
-              padding: 30px;
-              text-align: center;
-              font-family: Arial, sans-serif;
-              color: #999;
-          }
-          .drag-area.hover {
-              border-color: #333;
-              color: #333;
-          }
-          .file-input {
-              display: none;
-          }
-      </style>
-  </head>
-  <body>
-  
-      <h1>Envie seus arquivos</h1>
-      <p>Módulos disponíveis: {{ form.modulo }}</p> 
-      <!-- Formulário de upload -->
-      <form method="post" enctype="multipart/form-data">
-          {% csrf_token %}
-          
-         <label> Titulo {{ form.title }}</label> 
-          <!-- Área de arraste e soltar -->
-          <div class="drag-area" id="drag-area">
-              Arraste e solte o arquivo aqui ou clique para selecionar
-          </div>
-  
-          <!-- Campo de upload tradicional escondido -->
-          <input type="file" id="file-input" name="file" class="file-input">
-  
-          <!-- Botão de envio -->
-          <button type="submit">Enviar</button>
-      </form>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload de Arquivo</title>
+    <style>
+        .drag-area {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            width: 100%;
+            padding: 30px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            color: #999;
+        }
+        .drag-area.hover {
+            border-color: #333;
+            color: #333;
+        }
+        .file-input {
+            display: none;
+        }
+    </style>
+</head>
+<body>
 
-      <button ><a href="{% url 'listar_material' %}"> Acessar Gerenciamenteo</a></button>
+    <h1>Envie seus arquivos</h1>
 
+    <!-- Formulário de upload -->
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <!-- Campo de título -->
+        <label for="id_title">Título</label>
+        {{ form.title }}
 
-      <button ><a href="{% url 'cadastro_geral' %}"> Voltar</a></button>
-  
-      <script>
-          const dragArea = document.getElementById('drag-area');
-          const fileInput = document.getElementById('file-input');
-  
-          // Quando o usuário clica na área de arraste, o input file é acionado
-          dragArea.addEventListener('click', () => {
-              fileInput.click();
-          });
-  
-          // Adiciona a classe "hover" quando o arquivo está sendo arrastado sobre a área
-          dragArea.addEventListener('dragover', (event) => {
-              event.preventDefault();
-              dragArea.classList.add('hover');
-          });
-  
-          // Remove a classe "hover" quando o arquivo não está mais sobre a área
-          dragArea.addEventListener('dragleave', () => {
-              dragArea.classList.remove('hover');
-          });
-  
-          // Quando o arquivo é solto na área
-          dragArea.addEventListener('drop', (event) => {
-              event.preventDefault();
-              dragArea.classList.remove('hover');
-  
-              // Atribuir o arquivo ao input file
-              const files = event.dataTransfer.files;
-              fileInput.files = files;
-  
-              // Alterar o texto da área para o nome do arquivo
-              dragArea.textContent = files[0].name;
-          });
-  
-          // Quando o arquivo é selecionado diretamente pelo input
-          fileInput.addEventListener('change', (event) => {
-              const files = event.target.files;
-              dragArea.textContent = files[0].name;
-          });
-      </script>
-  
-  </body>
-  </html>
-  
+        <!-- Campo de seleção de módulo -->
+        <label for="id_modulo">Módulo</label>
+        {{ form.modulo }}
+
+        <!-- Área de arraste e soltar -->
+        <div class="drag-area" id="drag-area">
+            Arraste e solte o arquivo aqui ou clique para selecionar
+        </div>
+
+        <!-- Campo de upload tradicional escondido -->
+        <input type="file" id="file-input" name="file" class="file-input">
+        
+        <!-- Botão de envio -->
+        <button type="submit">Enviar</button>
+    </form>
+
+    <button><a href="{% url 'listar_material' %}">Acessar Gerenciamento</a></button>
+    <button><a href="{% url 'cadastro_geral' %}">Voltar</a></button>
+
+    <script>
+        const dragArea = document.getElementById('drag-area');
+        const fileInput = document.getElementById('file-input');
+
+        // Quando o usuário clica na área de arraste, o input file é acionado
+        dragArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        // Adiciona a classe "hover" quando o arquivo está sendo arrastado sobre a área
+        dragArea.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            dragArea.classList.add('hover');
+        });
+
+        // Remove a classe "hover" quando o arquivo não está mais sobre a área
+        dragArea.addEventListener('dragleave', () => {
+            dragArea.classList.remove('hover');
+        });
+
+        // Quando o arquivo é solto na área
+        dragArea.addEventListener('drop', (event) => {
+            event.preventDefault();
+            dragArea.classList.remove('hover');
+
+            // Atribuir o arquivo ao input file
+            const files = event.dataTransfer.files;
+            fileInput.files = files;
+
+            // Alterar o texto da área para o nome do arquivo
+            dragArea.textContent = files[0].name;
+        });
+
+        // Quando o arquivo é selecionado diretamente pelo input
+        fileInput.addEventListener('change', (event) => {
+            const files = event.target.files;
+            dragArea.textContent = files[0].name;
+        });
+    </script>
+
+</body>
+</html>
