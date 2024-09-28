@@ -10,14 +10,18 @@
 </head>
 <body>
     <h1>Cadastrar Módulo</h1>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Cadastrar</button>
-</form>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Salvar Módulo</button>
+    </form>
 
 <div class="btn">
     <a href="{% url 'cadastro_geral' %}">Voltar para o inicio</a>
 </div> 
+<br>
+<div class="btn">
+    <a href="{% url 'listar_modulos' %}">listar modulos</a>
+</div>
 </body>
 </html>

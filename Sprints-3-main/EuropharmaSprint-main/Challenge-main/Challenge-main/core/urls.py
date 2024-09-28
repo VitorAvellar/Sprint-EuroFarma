@@ -28,4 +28,6 @@ urlpatterns = [
     path('deletar_material/<int:material_id>/', views.deletar_material, name='deletar_material'),
     path('listar_setores/', views.listar_setores, name='listar_setores'),
     path('deletar_setor/<int:setor_id>/', views.deletar_setor, name='deletar_setor'),
+    path('listar_modulos/', views.listar_modulos, name='listar_modulos'),
+    path('modulos/deletar/<int:modulo_id>/', views.deletar_modulo, name='deletar_modulo'),
 ]

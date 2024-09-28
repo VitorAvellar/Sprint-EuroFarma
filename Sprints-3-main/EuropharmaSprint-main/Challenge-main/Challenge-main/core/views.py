@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
-from .forms import ClienteForm, MaterialForm, PerguntaForm, RespostaForm, AcervoVideoForm, SetorForm, ModuloForm
+from .forms import ClienteForm, MaterialForm, PerguntaForm, RespostaForm, AcervoVideoForm, SetorForm, ModuloForm, Modulos
 from .models import AcervoVideos, Pergunta, Resposta, Setores, Modulos, Material
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.urls import reverse
 import mimetypes
 
 
@@ -180,12 +181,13 @@ def cadastrar_modulos(request):
     if request.method == 'POST':
         form = ModuloForm(request.POST)
         if form.is_valid():
-            form.save()  # Salva o novo módulo no banco de dados
+            form.save()  # Salva o novo módulo com o vídeo selecionado
             return redirect('cadastrar_modulos')
     else:
         form = ModuloForm()
     
     return render(request, 'core/cadastrar_modulos.html', {'form': form})
+
 
 # Metodo responsavel por realizar o upload e cadastro dos arquivo
 def cadastro_material(request):
@@ -244,7 +246,6 @@ def deletar_material(request, material_id):
     
     # return render(request, 'confirm_delete.html', {'material': material})
  
-
 def listar_setores(request):
     setores = Setores.objects.all()  # Obtém todos os setores cadastrados
     return render(request, 'core/listar_setores.html', {'setores': setores})
@@ -253,3 +254,12 @@ def deletar_setor(request, setor_id):
     setor = get_object_or_404(Setores, id=setor_id)
     setor.delete()  # Deleta o setor do banco de dados
     return redirect('listar_setores')  # Redireciona para a página de listagem dos setores
+
+def listar_modulos(request):
+    modulos = Modulos.objects.all() 
+    return render(request, 'core/listar_modulos.html', {'modulos': modulos})
+
+def deletar_modulo(request, modulo_id):
+    modulo = get_object_or_404(Modulos, id=modulo_id)  # Verifica se o módulo existe
+    modulo.delete()  # Deleta o módulo
+    return redirect('listar_modulos')

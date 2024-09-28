@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de modulos</title>
+</head>
+<body>
+    <h1>Lista de Módulos</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Nome do Módulo</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for modulo in modulos %}
+                <tr>
+                    <td>{{ modulo.nome_modulo }}</td>
+                    <td>
+                        <form action="{% url 'deletar_modulo' modulo.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">Deletar</button>
+                        </form>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="2">Nenhum módulo encontrado.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

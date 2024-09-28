@@ -1,6 +1,7 @@
-from django.db import models
+from django.db import models 
 from django.utils import timezone
 from django.contrib.auth.models import User
+
 
 class Setores(models.Model):
     nome_setor = models.CharField(max_length=100)
@@ -10,6 +11,7 @@ class Setores(models.Model):
 
 class Modulos(models.Model):
     nome_modulo = models.CharField(max_length=255)
+    video = models.ForeignKey('AcervoVideos', on_delete=models.SET_NULL, null=True, blank=True)  # Referenciar com string
 
     def __str__(self):
         return self.nome_modulo

@@ -55,8 +55,6 @@ class AcervoVideoForm(forms.ModelForm):
         self.fields['setor'].queryset = Setores.objects.all()
         # Adiciona os módulos disponíveis
 
-
-
 class PerguntaForm(forms.ModelForm):
     username = forms.CharField(max_length=150, help_text="Informe seu nome de usuário já cadastrado")
 
@@ -94,10 +92,18 @@ class SetorForm(forms.ModelForm):
 class ModuloForm(forms.ModelForm):
     class Meta:
         model = Modulos
-        fields = ['nome_modulo']
+        fields = ['nome_modulo', 'video']  # Incluímos o campo vídeo
         widgets = {
             'nome_modulo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome do Módulo'}),
+            'video': forms.Select(attrs={'class': 'form-control'})  # Exibe o dropdown de vídeos
         }
+
+    def __init__(self, *args, **kwargs):
+        super(ModuloForm, self).__init__(*args, **kwargs)
+        # Adiciona a lista de vídeos disponíveis
+        self.fields['video'].queryset = AcervoVideos.objects.all()
+        self.fields['video'].label_from_instance = lambda obj: obj.nome_video  # Exibe apenas o nome do vídeo
+
 
 class MaterialForm(forms.ModelForm):
     class Meta:
