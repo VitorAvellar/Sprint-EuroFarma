@@ -1,14 +1,17 @@
+/* General body styling */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
+/* FAQ title */
 h2 {
     margin-top: 0;
     text-align: center;
 }
 
+/* Buttons */
 .faq_perguntas {
     text-align: center;
     margin-bottom: 20px;
@@ -27,6 +30,7 @@ h2 {
     background-color: #16199c;
 }
 
+/* Search form */
 form {
     text-align: center;
     margin-bottom: 20px;
@@ -54,18 +58,22 @@ button[type="submit"]:hover {
     background-color: #16199c;
 }
 
+/* List styling */
 ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
+/* FAQ item styling */
 li {
     background-color: #fff;
     padding: 1em;
     margin-bottom: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    word-wrap: break-word; /* Add this line to wrap long text */
+    word-wrap: break-word;
+    max-width: 700px; /* Restrict width for centering */
+    margin: 0 auto; /* Center the FAQ item */
 }
 
 li strong {
@@ -77,7 +85,7 @@ li em {
     color: #666;
 }
 
-
+/* Nested lists for answers */
 ul ul {
     margin-top: 10px;
     padding-left: 20px;
@@ -88,16 +96,20 @@ ul ul li {
     padding: 0.5em;
     margin-bottom: 10px;
     box-shadow: none;
+    max-width: 650px; /* Restrict width for centering */
+    margin: 0 auto; /* Center the answers */
 }
 
 ul ul li:hover {
     background-color: #f0f0f0;
 }
 
-
+/* Response form */
 #respostaForm {
     display: none;
     margin-top: 10px;
+    max-width: 650px; /* Restrict width for centering */
+    margin: 0 auto; /* Center the form */
 }
 
 #respostaForm textarea {
