@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload de Arquivo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <style>
         .drag-area {
             border: 2px dashed #ccc;
@@ -21,38 +22,155 @@
         .file-input {
             display: none;
         }
+
+        .hdr{
+        width: 100%;
+        display: flex;
+    }
+
+.hdr_eur{
+justify-content: start;
+}
+
+.hdr_eur img{
+    max-width: 100px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.icon{
+max-width: 30px;
+max-height: 30px;
+margin-right: 2px;
+margin-left: 10px;
+margin-bottom: 10px;
+}
+
+.hdr_lgn{
+    display: flex;
+    width: 100%;
+    text-align: right;
+    justify-content: end;
+    align-items: flex-end;
+    margin-right: 10px;
+}
+
+body{
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.txt{
+    font-size: 2em;
+    text-decoration: underline;
+}
+
+
+hr {
+    border: 0;
+    border-top: 5px solid #000;
+    margin: 1px 0;
+}
+
+.labels{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.labels label{
+    max-width: 30%;
+    margin-bottom: 10px;
+}
+
+.drag-area{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 30%;
+}
+
+
     </style>
 </head>
 <body>
 
-    <h1>Envie seus arquivos</h1>
+    <header>
+        <div class="hdr">
+            <div class="hdr_eur">
+                <img class="eur" src="../../static/images/europahma.png" alt="">
+            </div>
+            <div class="hdr_lgn">
+              
+                <img class="icon" src="../../static/images/user.png" alt="">
+                <p id="var_usu"></p>
+            </div>
+        </div>
+    </header>
+    <hr>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+        <a class="navbar-brand bg-transparent">Cadastrar:</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alterna navegação">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse bg-transparent" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link bg-transparent" href="{% url 'cadastro_material' %}">Arquivo <span class="sr-only">(Página atual)</span></a>
+            </li>
+            <li class="nav-item bg-transparent">
+              <a class="nav-link tst" href="{% url 'adicionar_video' %}">Video Aula</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link bg-transparent" href="#">Exercicio</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+    <h1> Cadastro de Arquivos </h1>
+
+    <h3> Envie seus arquivos </h3>
 
     <!-- Formulário de upload -->
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         
         <!-- Campo de título -->
-        <label for="id_title">Título</label>
-        {{ form.title }}
 
-        <!-- Campo de seleção de módulo -->
-        <label for="id_modulo">Módulo</label>
-        {{ form.modulo }}
 
-        <!-- Área de arraste e soltar -->
-        <div class="drag-area" id="drag-area">
+        <div class="labels mb-2">
+            <div class="form-inline p-2">
+            <label for="id_title" class="mr-3">Título</label>
+            {{ form.title }}
+            </div>
+
+            <div class="form-inline">
+            <!-- Campo de seleção de módulo -->
+            <label for="id_modulo" class="mr-3">Módulo</label>
+            {{ form.modulo }}
+            </div>
+        
+      
+
+            <!-- Área de arraste e soltar -->
+            <div class="drag-area mt-2" id="drag-area">
             Arraste e solte o arquivo aqui ou clique para selecionar
+            </div>
         </div>
-
         <!-- Campo de upload tradicional escondido -->
         <input type="file" id="file-input" name="file" class="file-input">
         
         <!-- Botão de envio -->
-        <button type="submit">Enviar</button>
+        <button type="submit" class="btn btn-success btn-lg active mb-2">Enviar</button>
     </form>
 
-    <button><a href="{% url 'listar_material' %}">Acessar Gerenciamento</a></button>
-    <button><a href="{% url 'cadastro_geral' %}">Voltar</a></button>
+    <a href="{% url 'listar_material' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Acessar Gerenciamento</a>
+    <a href="{% url 'cadastro_geral' %}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Voltar</a>
+
+    <!-- <button><a href="{% url 'listar_material' %}">Acessar Gerenciamento</a></button>
+    <button><a href="{% url 'cadastro_geral' %}">Voltar</a></button> -->
 
     <script>
         const dragArea = document.getElementById('drag-area');

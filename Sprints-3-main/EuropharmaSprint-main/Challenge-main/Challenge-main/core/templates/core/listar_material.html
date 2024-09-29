@@ -1,44 +1,189 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <title>Lista de Documentos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
-<body>
-    <h1>Lista de Documentos</h1>
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        /* Centraliza o conteúdo horizontalmente */
+        align-items: center;
+        /* Alinha o conteúdo verticalmente */
+        flex-direction: column;
+        /* Faz com que os elementos fiquem em coluna */
 
-    <!-- Filtro por Módulo -->
-    <form method="GET">
-        <select name="modulo">
-            <option value="">Todos os Módulos</option>
-            {% for modulo in modulos %}
-                <option value="{{ modulo.id }}" {% if modulo.id|stringformat:"d" == request.GET.modulo %}selected{% endif %}>
+    }
+
+    .material-container {
+        display: flex;
+        align-items: center;
+    }
+
+    ul {
+        list-style-type: none;
+        /* Remove os pontos */
+        padding-left: 0;
+        /* Remove qualquer padding à esquerda */
+    }
+
+
+    .hdr {
+        width: 100%;
+        display: flex;
+    }
+
+    .hdr_eur {
+        justify-content: start;
+    }
+
+    .hdr_eur img {
+        max-width: 100px;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+
+    .icon {
+        max-width: 30px;
+        max-height: 30px;
+        margin-right: 2px;
+        margin-left: 10px;
+        margin-bottom: 10px;
+    }
+
+    .hdr_lgn {
+        display: flex;
+        width: 100%;
+        text-align: right;
+        justify-content: end;
+        align-items: flex-end;
+        margin-right: 10px;
+    }
+
+    body {
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .txt {
+        font-size: 2em;
+        text-decoration: underline;
+    }
+
+
+    hr {
+        border: 0;
+        border-top: 5px solid #000;
+        margin: 1px 0;
+    }
+
+    .tst a {
+        color: aliceblue;
+        text-decoration: none;
+    }
+
+    .navbar {
+        padding-top: 0.5rem;
+        padding-right: 1rem;
+        padding-bottom: 0.5rem;
+        padding-left: 1rem;
+    }
+</style>
+
+<body>
+
+    <header>
+        <div class="hdr">
+            <div class="hdr_eur">
+                <img class="eur" src="../../static/images/europahma.png" alt="">
+            </div>
+            <div class="hdr_lgn">
+
+                <img class="icon" src="../../static/images/user.png" alt="">
+                <p id="var_usu"></p>
+            </div>
+        </div>
+    </header>
+    <hr>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand">Gerenciar:</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Alterna navegação">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'listar_material' %}">Arquivo <span class="sr-only">(Página
+                            atual)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'acervo_videos' %}">Video Aula</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Exercicio</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <h1>Lista de Documentos</h1>
+
+        <!-- Filtro por Módulo -->
+
+        <form method="GET">
+            <select name="modulo">
+                <option value="">Todos os Módulos</option>
+                {% for modulo in modulos %}
+                <option value="{{ modulo.id }}"
+                    {% if modulo.id|stringformat:"d" == request.GET.modulo %}selected{% endif %}>
                     {{ modulo.nome_modulo }}
                 </option>
-            {% endfor %}
-        </select>
-        <button type="submit">Filtrar</button>
-    </form>
+                {% endfor %}
+            </select>
+            <button type="submit" class="btn btn-info btn-sm active">Filtrar</button>
+        </form>
 
-    <!-- Lista de Documentos -->
-    <ul>
-        {% for material in material %}
-            <li>
-                <!-- Nome do Material com Módulo -->
-                <a href="{% url 'download_document' material.id %}">{{ material.title }} ({{ material.modulo.nome_modulo }}) {{ material.file.name|slice:"-4:" }}</a>
-            </li>
-            <!-- Botão de Exclusão -->
-            <form action="{% url 'deletar_material' material.id %}" method="post" style="display:inline;">
-                {% csrf_token %}
-                <button type="submit" onclick="return confirm('Tem certeza que deseja excluir este documento?');">Excluir</button>
-            </form>
-        {% empty %}
+        <!-- Lista de Documentos -->
+        <ul>
+            {% for material in material %}
+            <div class="material-container">
+                <li>
+
+                    <!-- Nome do Material com Módulo -->
+                    <a href="{% url 'download_document' material.id %}" class="mr-2">{{ material.title }}
+                        {{ material.file.name|slice:"-4:" }} </a>
+                </li>
+                <!-- Botão de Exclusão -->
+                <form action="{% url 'deletar_material' material.id %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" onclick="return confirm('Tem certeza que deseja excluir este documento?');"
+                        class="btn btn-danger btn-sm active mb-1 mt-1">Excluir</button>
+                </form>
+
+            </div>
+            {% empty %}
             <li>Nenhum documento encontrado.</li>
-        {% endfor %}
-    </ul>
+            {% endfor %}
+        </ul>
 
-    <!-- Botões de Navegação -->
-    <button><a href="{% url 'cadastro_material' %}">Voltar</a></button>
-    <button><a href="{% url 'cadastro_geral' %}">Retornar à tela de cadastros gerais</a></button>
+        <!-- Botões de Navegação -->
+        <button class="btn btn-secondary btn-lg active mb-2  tst"><a
+                href="{% url 'cadastro_material' %}">Cadastrar</a></button>
+        <button class="btn btn-success btn-lg active tst"><a href="{% url 'cadastro_geral' %}">Retornar à tela de cadastros gerais</a></button>
+    </div>
 </body>
+
 </html>

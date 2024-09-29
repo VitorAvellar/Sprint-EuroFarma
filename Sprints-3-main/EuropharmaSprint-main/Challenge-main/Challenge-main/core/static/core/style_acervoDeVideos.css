@@ -83,7 +83,15 @@ button[type="submit"]:hover {
 
 div {
     text-align: center;
-    margin-top: 20px;
+   
+}
+nav a button{
+    background-color: none;
+    padding: 0;
+}
+
+nav a :hover{
+    background-color: transparent;
 }
 
 a {
@@ -96,5 +104,6 @@ a {
 }
 
 a:hover {
-    background-color: #1d1390;
+    background-color: transparent;
 }
+

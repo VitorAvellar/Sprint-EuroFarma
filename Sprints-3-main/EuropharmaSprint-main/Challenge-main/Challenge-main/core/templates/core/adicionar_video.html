@@ -6,25 +6,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adicionar Vídeo</title>
     <link rel="stylesheet" type="text/css" href="../../static/core/style_cadastro_videos.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
+<style>
+    
+    .hdr{
+        width: 100%;
+        display: flex;
+    }
+
+.hdr_eur{
+justify-content: start;
+}
+
+.hdr_eur img{
+    max-width: 100px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.icon{
+max-width: 30px;
+max-height: 30px;
+margin-right: 2px;
+margin-left: 10px;
+margin-bottom: 10px;
+}
+
+.hdr_lgn{
+    display: flex;
+    width: 100%;
+    text-align: right;
+    justify-content: end;
+    align-items: flex-end;
+    margin-right: 10px;
+}
+
+body{
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.txt{
+    font-size: 2em;
+    text-decoration: underline;
+}
+
+
+hr {
+    border: 0;
+    border-top: 5px solid #000;
+    margin: 1px 0;
+}
+
+
+</style>
 
 <body>
+
+    <header>
+        <div class="hdr">
+            <div class="hdr_eur">
+                <img class="eur" src="../../static/images/europahma.png" alt="">
+            </div>
+            <div class="hdr_lgn">
+
+                <img class="icon" src="../../static/images/user.png" alt="">
+                <p id="var_usu"></p>
+            </div>
+        </div>
+    </header>
+    <hr>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light conf_bar">
+        <a class="navbar-brand bg-transparent conf_bar">Cadastrar:</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alterna navegação">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse bg-transparent" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link bg-transparent" href="{% url 'cadastro_material' %}">Arquivo <span class="sr-only">(Página atual)</span></a>
+            </li>
+            <li class="nav-item bg-transparent">
+              <a class="nav-link tst" href="{% url 'adicionar_video' %}">Video Aula</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link bg-transparent" href="#">Exercicio</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
 
     <h1>Adicionar Novo Vídeo</h1>
 
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Adicionar</button>
+        <button type="submit" class="bg-success">Adicionar</button>
     </form>
 
-    <div class="voltar">
-        <a href="{% url 'acervo_videos' %}">Voltar para o Acervo</a>
+    <div class="d-flex justify-content-center">
+        
+    <div class="voltar mr-2">
+        <a href="{% url 'acervo_videos' %}" class="btn btn-primary btn-lg active tstbt mb-2">Acessar Gerenciamento</a>
     </div>
 
-    <div class="voltar">
-        <a href="{% url 'cadastro_geral' %}">Voltar para inicio</a>
+    <div class="voltar ml-2">
+        <a href="{% url 'cadastro_geral' %}" class="btn btn-secondary btn-lg active">Voltar</a>
     </div>
+    
+</div>
 
 </body>
 
