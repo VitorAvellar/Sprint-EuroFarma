@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="treinamento">Selecione um Treinamento:</label>
+            <select name="treinamento" id="treinamento" class="form-control" onchange="this.form.submit()">
+                <option value="">-- Escolha um Treinamento --</option>
+                {% for treinamento in treinamentos %}
+                    <option value="{{ treinamento.id }}">{{ treinamento.nome_treinamento }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </form>
+    
+    {% if treinamentos %}
+        <form method="POST">
+            {% csrf_token %}
+            {% for pergunta in perguntas %}
+                <div class="form-group">
+                    <label>{{ pergunta.texto_pergunta }}</label>
+                    {% for resposta in pergunta.respostas.all %}
+                        <div>
+                            <input type="radio" name="resposta" value="{{ resposta.id }}" required>
+                            <label>{{ resposta.texto_resposta }}</label>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Enviar Respostas</button>
+        </form>
+    {% endif %}
+    
+    {% if message %}
+        <div class="alert alert-info">{{ message }}</div>
+    {% endif %}
+</body>
+</html>

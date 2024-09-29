@@ -151,3 +151,25 @@ class TreinamentoForm(forms.ModelForm):
         super(TreinamentoForm, self).__init__(*args, **kwargs)
         self.fields['setor'].queryset = Setores.objects.all()
 
+
+class QuestionarioForm(forms.Form):
+    treinamento = forms.ModelChoiceField(queryset=Treinamentos.objects.all(), label="Selecione o Treinamento")
+    
+    def __init__(self, *args, **kwargs):
+        perguntas = kwargs.pop('perguntas', None)  # Recebe as perguntas como parâmetro
+        super(QuestionarioForm, self).__init__(*args, **kwargs)
+        
+        if perguntas:
+            # Adiciona um campo de resposta para cada pergunta
+            for pergunta in perguntas:
+                self.fields[f'pergunta_{pergunta.id}'] = forms.ChoiceField(
+                    choices=[
+                        ('A', pergunta.alternativa_a),
+                        ('B', pergunta.alternativa_b),
+                        ('C', pergunta.alternativa_c),
+                        ('D', pergunta.alternativa_d),
+                        ('E', pergunta.alternativa_e) if pergunta.alternativa_e else ('', '')  # Condicional para a alternativa E
+                    ],
+                    label=pergunta.pergunta,
+                    widget=forms.RadioSelect
+                )

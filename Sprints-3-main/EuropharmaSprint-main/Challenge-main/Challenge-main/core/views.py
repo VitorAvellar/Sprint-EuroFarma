@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
-from .forms import ClienteForm, ExercicioForm, MaterialForm, PerguntaForm, RespostaForm, AcervoVideoForm, SetorForm, ModuloForm, Modulos, TreinamentoForm
+from .forms import ClienteForm, ExercicioForm, MaterialForm, PerguntaForm, RespostaForm, AcervoVideoForm, SetorForm, ModuloForm, Modulos, TreinamentoForm, QuestionarioForm
 from .models import AcervoVideos, Exercicio, Pergunta, Resposta, Setores, Modulos, Material, Treinamentos
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.urls import reverse
@@ -306,3 +306,26 @@ def deletar_treinamento(request, treinamento_id):
     treinamento = get_object_or_404(Treinamentos, id=treinamento_id)  # Verifica se o módulo existe
     treinamento.delete()  # Deleta o módulo
     return redirect('listar_treinamento')
+
+# def questionario(request):
+#     perguntas = []
+#     message = None
+
+#     if request.method == 'POST':
+#         treinamento_id = request.POST.get('treinamento')
+        
+#         # Carrega as perguntas relacionadas ao treinamento selecionado
+#         if treinamento_id:
+#             perguntas = Pergunta.objects.filter(treinamento_id=treinamento_id)
+
+#         resposta_id = request.POST.get('resposta')
+#         if resposta_id:
+#             resposta = get_object_or_404(Resposta, id=resposta_id)
+#             pergunta = resposta.pergunta
+#             if resposta.texto_resposta == pergunta.resposta_correta:
+#                 message = "Você acertou!"
+#             else:
+#                 message = "Você errou. A resposta correta é: " + pergunta.resposta_correta
+
+#     treinamentos = Treinamentos.objects.all()
+#     return render(request, 'core/questionario.html', {'treinamentos': treinamentos, 'perguntas': perguntas, 'message': message})
