@@ -291,6 +291,7 @@ flex-direction: row;
         {% for video in videos %}
             <div class="video-item">
                 <h3>Nome: {{ video.nome_video }}</h3>
+                <h5>Setor: {{video.setor}}</h5>
                 <p>{{ video.descricao }}</p>
                 
                 <!-- Exibe o vídeo usando um iframe -->
