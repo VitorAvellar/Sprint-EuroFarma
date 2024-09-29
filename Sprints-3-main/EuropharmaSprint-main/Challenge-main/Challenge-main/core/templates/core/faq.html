@@ -5,19 +5,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FAQ</title>
     <link rel="stylesheet" type="text/css" href="../../static/core/style_faq.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+  
+    body select,
+    input {
+      max-width: 30%;
+      margin-left: 10px;
+    }
+  
+    .hdr {
+      width: 100%;
+      display: flex;
+    }
+  
+    .hdr_eur {
+      justify-content: start;
+    }
+  
+    .hdr_eur img {
+      max-width: 100px;
+      margin-left: 10px;
+      margin-top: 10px;
+    }
+  
+    .icon {
+      max-width: 30px;
+      max-height: 30px;
+      margin-right: 2px;
+      margin-left: 10px;
+      margin-bottom: 10px;
+    }
+  
+    .hdr_lgn {
+      display: flex;
+      width: 100%;
+      text-align: right;
+      justify-content: end;
+      align-items: flex-end;
+      margin-right: 10px;
+    }
+  
+  
+  
+    .txt {
+      font-size: 2em;
+      text-decoration: underline;
+    }
+  
+  
+    hr {
+      border: 0;
+      border-top: 5px solid #000;
+      margin: 1px 0;
+    }
+</style>
 <body>
+        <header>
+          <div class="hdr">
+            <div class="hdr_eur">
+              <img class="eur" src="../../static/images/europahma.png" alt="">
+            </div>
+            <div class="hdr_lgn">
+      
+              <img class="icon" src="../../static/images/user.png" alt="">
+              <p id="var_usu"></p>
+            </div>
+          </div>
+        </header>
+        <hr>
+
+
     <h2>FAQ - Perguntas Frequentes</h2>
     <div class="faq_perguntas">
         <a href="{% url 'cadastro_pergunta' %}">
-            <button class="btn">Fazer uma pergunta</button>
+            <button class="btn bg-success">Fazer uma pergunta</button>
         </a>
     </div>
 
     <!-- Formulário de pesquisa -->
     <form method="GET" action="{% url 'faq' %}">
         <input type="text" name="q" value="{{ query }}" placeholder="Pesquisar por nome de usuário">
-        <button type="submit">Pesquisar</button>
+        <button type="submit" class="btn bg-info">Pesquisar</button>
     </form>
 
     <!-- Exibe as perguntas filtradas ou todas -->
@@ -44,17 +121,25 @@
                         {% csrf_token %}
                         <textarea name="texto_resposta" rows="3" class="form-control" placeholder="Escreva sua resposta aqui..."></textarea>
                         <input type="hidden" name="pergunta_id" value="{{ pergunta.id }}">
-                        <button class="btn" type="submit">Enviar Resposta</button>
+                        <button class="btn bg-success mt-2" type="submit">Enviar Resposta</button>
                     </form>
                 </div>
 
                 <!-- Botão de deletar pergunta -->
                 <form method="POST" action="{% url 'deletar_pergunta' pergunta.id %}" style="display:inline;">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir esta pergunta?')">Deletar</button>
+                    <button type="submit" class="btn bg-danger" onclick="return confirm('Tem certeza que deseja excluir esta pergunta?')">Deletar</button>
                 </form>
             </li>
         {% endfor %}
     </ul>
+    
+    <a href="{% url 'cadastro_geral' %}"><button class="btn-lg bg-secondary">Voltar</button></a>
+
+
+    <script src="../../static/js//script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', validaUsu);
+    </script>
 </body>
 </html>

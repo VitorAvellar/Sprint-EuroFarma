@@ -37,6 +37,5 @@ function validaUsu() {
 
     } else if (userEmail === "ADM") {
         document.getElementById('var_usu').textContent = `${userEmail}`;
-
     }
 }
