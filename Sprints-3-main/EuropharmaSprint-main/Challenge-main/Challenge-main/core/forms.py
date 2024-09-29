@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Clientes, Setores, AcervoVideos, Pergunta, TipoPergunta, Resposta, Modulos, Material
+from .models import Clientes, Exercicio, Setores, AcervoVideos, Pergunta, TipoPergunta, Resposta, Modulos, Material, Treinamentos
 
 
 class ClienteForm(UserCreationForm):
@@ -118,3 +118,36 @@ class MaterialForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(MaterialForm, self).__init__(*args, **kwargs)
         self.fields['modulo'].queryset = Modulos.objects.all()  # Adiciona os módulos disponíveis
+
+class ExercicioForm(forms.ModelForm):
+    class Meta:
+        model = Exercicio
+        fields = ['pergunta', 'alternativa_a', 'alternativa_b', 'alternativa_c', 'alternativa_d', 'alternativa_e', 'resposta_correta', 'treinamento', 'modulo']
+        widgets = {
+             'alternativa_a': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Alternativa A'}),
+             'alternativa_b': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Alternativa B'}),
+             'alternativa_c': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Alternativa C'}),
+             'alternativa_d': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Alternativa D'}),
+             'alternativa_e': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Alternativa E'}),
+             'pergunta': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Escreva sua Pergunta'})
+         }
+    def clean_resposta_correta(self):
+        resposta_correta = self.cleaned_data.get('resposta_correta')
+        if not resposta_correta:
+            raise forms.ValidationError("Você deve selecionar a resposta correta.")
+        return resposta_correta
+
+
+
+class TreinamentoForm(forms.ModelForm):
+    class Meta:
+        model = Treinamentos
+        fields = ['nome_treinamento', 'setor']
+        widgets = {
+            'nome_treinamento': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome do Treinamento'}),
+            'setor': forms.Select(attrs={'class': 'form-control'})  # Campo de escolha de módulo
+        }
+    def __init__(self, *args, **kwargs):
+        super(TreinamentoForm, self).__init__(*args, **kwargs)
+        self.fields['setor'].queryset = Setores.objects.all()
+

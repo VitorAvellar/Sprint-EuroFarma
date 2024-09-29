@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
-from .forms import ClienteForm, MaterialForm, PerguntaForm, RespostaForm, AcervoVideoForm, SetorForm, ModuloForm, Modulos
-from .models import AcervoVideos, Pergunta, Resposta, Setores, Modulos, Material
+from .forms import ClienteForm, ExercicioForm, MaterialForm, PerguntaForm, RespostaForm, AcervoVideoForm, SetorForm, ModuloForm, Modulos, TreinamentoForm
+from .models import AcervoVideos, Exercicio, Pergunta, Resposta, Setores, Modulos, Material, Treinamentos
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.urls import reverse
 import mimetypes
@@ -263,3 +263,46 @@ def deletar_modulo(request, modulo_id):
     modulo = get_object_or_404(Modulos, id=modulo_id)  # Verifica se o módulo existe
     modulo.delete()  # Deleta o módulo
     return redirect('listar_modulos')
+
+def cadastrar_exercicio(request):
+    if request.method == 'POST':
+        form = ExercicioForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_exercicios')  # Redirecionar para uma página de sucesso
+    else:
+        form = ExercicioForm()
+    
+    return render(request, 'core/cadastrar_exercicio.html', {'form': form})
+
+def listar_exercicios(request):
+    # Buscando todos os exercícios do banco de dados
+    exercicios = Exercicio.objects.all()
+    
+    # Passando os exercícios para o template
+    return render(request, 'core/listar_exercicios.html', {'exercicios': exercicios})
+
+def deletar_exercicio(request, exercicio_id):
+    exercicio = get_object_or_404(Exercicio, id=exercicio_id)  # Verifica se o módulo existe
+    exercicio.delete()  # Deleta o módulo
+    return redirect('listar_exercicios')
+
+def cadastrar_treinamento(request):
+    if request.method == 'POST':
+        form = TreinamentoForm(request.POST)
+        if form.is_valid():
+            form.save()  # Salva o novo módulo com o vídeo selecionado
+            return redirect('cadastrar_treinamento')
+    else:
+        form = TreinamentoForm()
+    
+    return render(request, 'core/cadastrar_treinamento.html', {'form': form})
+
+def listar_treinamento(request):
+    treinamento = Treinamentos.objects.all() 
+    return render(request, 'core/listar_treinamento.html', {'treinamento': treinamento})
+
+def deletar_treinamento(request, treinamento_id):
+    treinamento = get_object_or_404(Treinamentos, id=treinamento_id)  # Verifica se o módulo existe
+    treinamento.delete()  # Deleta o módulo
+    return redirect('listar_treinamento')

@@ -11,7 +11,9 @@
     integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <style>
-
+body{
+    font-family: Arial, sans-serif;
+}
 label {
     display: block;
     margin-bottom: 10px;
@@ -262,7 +264,7 @@ flex-direction: row;
               <a class="nav-link tst" href="{% url 'acervo_videos' %}">Video Aula</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link bg-transparent" href="#">Exercicio</a>
+              <a class="nav-link bg-transparent" href="{% url 'listar_exercicios' %}">Exercicio</a>
             </li>
           </ul>
         </div>

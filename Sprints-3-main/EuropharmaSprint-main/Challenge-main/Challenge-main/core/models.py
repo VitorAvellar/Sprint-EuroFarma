@@ -27,7 +27,9 @@ class Clientes(models.Model):
 class Treinamentos(models.Model):
     nome_treinamento = models.CharField(max_length=255)
     setor = models.ForeignKey(Setores, on_delete=models.SET_NULL, null=True)
-
+    def __str__(self):
+        return self.nome_treinamento
+    
 class AcervoVideos(models.Model):
     nome_video = models.CharField(max_length=255)
     descricao = models.TextField()
@@ -71,3 +73,15 @@ class Material(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Exercicio(models.Model):
+    pergunta = models.CharField(max_length=255)
+    alternativa_a = models.CharField(max_length=255)
+    alternativa_b = models.CharField(max_length=255)
+    alternativa_c = models.CharField(max_length=255)
+    alternativa_d = models.CharField(max_length=255)
+    alternativa_e = models.CharField(max_length=255, blank=True, null=True)
+    resposta_correta = models.CharField(max_length=1)
+    treinamento = models.ForeignKey(Treinamentos, on_delete=models.SET_NULL, null=True)
+    modulo = models.ForeignKey(Modulos, on_delete=models.SET_NULL, null=True)

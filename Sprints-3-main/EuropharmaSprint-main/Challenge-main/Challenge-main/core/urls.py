@@ -30,4 +30,11 @@ urlpatterns = [
     path('deletar_setor/<int:setor_id>/', views.deletar_setor, name='deletar_setor'),
     path('listar_modulos/', views.listar_modulos, name='listar_modulos'),
     path('modulos/deletar/<int:modulo_id>/', views.deletar_modulo, name='deletar_modulo'),
+    path('cadastrar_exercicio/', views.cadastrar_exercicio, name='cadastrar_exercicio'),
+    path('cadastrar_treinamento/', views.cadastrar_treinamento, name='cadastrar_treinamento'),
+    path('listar_treinamento/', views.listar_treinamento, name='listar_treinamento'),
+    path('deletar_treinamento/<int:treinamento_id>/', views.deletar_treinamento, name='deletar_treinamento'),
+    path('cadastrar_exercicio/', views.cadastrar_exercicio, name='cadastrar_exercicio'),
+    path('listar_exercicios/', views.listar_exercicios, name='listar_exercicios'),
+    path('deletar_exercicio/<int:exercicio_id>/', views.deletar_exercicio, name='deletar_exercicio'),
 ]
