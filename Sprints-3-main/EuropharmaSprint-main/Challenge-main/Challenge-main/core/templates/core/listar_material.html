@@ -3,25 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>Lista de Documentos</title>
+    <link rel="stylesheet" type="text/css" href="../../static/core/style_listar_material.css">
 </head>
 <body>
-  <h1>Lista de Documentos</h1>
-    <ul>
-        {% for material in material %}
-            <li>
-                <a href="{% url 'download_document' material.id %}">{{ material.title }} {{ material.file.name|slice:"-4:" }}</a>
-            </li>
-             <!-- Botão de Exclusão -->
-             <form action="{% url 'deletar_material' material.id %}" method="post" style="display:inline;">
-                {% csrf_token %}
-                <button type="submit" onclick="return confirm('Tem certeza que deseja excluir este documento?');">Excluir</button>
-            </form>
-        {% empty %}
-            <li>Nenhum documento encontrado.</li>
-        {% endfor %}
-    </ul>
+    <!-- Botão de menu -->
+    <div class="open-sidebar" onclick="toggleSidebar()">&#9776;</div>
 
-    <button ><a href="{% url 'cadastro_material' %}"> Voltar </a></button>
-    <button ><a href="{% url 'cadastro_geral' %}"> Retornar a tela de cadastros gerais </a></button>
+    <!-- Menu deslizante -->
+    <div id="sidebar" class="sidebar">
+        <!-- Botão para fechar o menu -->
+        <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">&times;</a>
+
+        <!-- Conteúdo do menu -->
+        <div class="menu-title">Nome do Treinamento</div>
+        <div class="submenu-title">Nome do Primeiro Módulo</div>
+        <a href="#" class="submenu-item">Aulas</a>
+        <a href="#" class="submenu-item">Materiais</a>
+        <a href="#" class="submenu-item">Exercícios</a>
+        
+        <div class="submenu-title">Nome do Segundo Módulo</div>
+        <a href="#" class="submenu-item">Aulas</a>
+        <a href="#" class="submenu-item">Materiais</a>
+    </div>
+
+    <div class="header">
+        &emsp;
+        <span>👤 Nome_user___</span>
+    </div>
+  <h1 class="title">Lista de Documentos</h1>
+  <div class="container">
+
+      <ul>
+          {% for material in material %}
+              <li style="padding-top: 30px;">
+                  <a href="{% url 'download_document' material.id %}">{{ material.title }} {{ material.file.name|slice:"-4:" }}</a>
+              </li>
+               <!-- Botão de Exclusão -->
+               <form action="{% url 'deletar_material' material.id %}" method="post" style="display:inline;">
+                  {% csrf_token %}
+                  <button class="btn" type="submit" onclick="return confirm('Tem certeza que deseja excluir este documento?');">Excluir</button>
+              </form>
+          {% empty %}
+              <li>Nenhum documento encontrado.</li>
+          {% endfor %}
+      </ul>
+  </div>
+
+    <button class="btn"><a href="{% url 'cadastro_material' %}"> Voltar </a></button>
+    <button class="btn"><a href="{% url 'cadastro_geral' %}"> Retornar a tela de cadastros gerais </a></button>
+    <script>
+        // Função para abrir e fechar o menu
+        function toggleSidebar() {
+            document.getElementById("sidebar").classList.toggle("active");
+        }
+    </script>
    </body>
 </html>

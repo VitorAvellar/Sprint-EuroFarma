@@ -5,49 +5,40 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Upload de Arquivo</title>
       <style>
-          .drag-area {
-              border: 2px dashed #ccc;
-              border-radius: 10px;
-              width: 100%;
-              padding: 30px;
-              text-align: center;
-              font-family: Arial, sans-serif;
-              color: #999;
-          }
-          .drag-area.hover {
-              border-color: #333;
-              color: #333;
-          }
-          .file-input {
-              display: none;
-          }
+          
       </style>
+      <link rel="stylesheet" type="text/css" href="../../static/core/style_cadastro_material.css">
   </head>
   <body>
-  
       <h1>Envie seus arquivos</h1>
-      <p>Módulos disponíveis: {{ form.modulo }}</p> 
-      <!-- Formulário de upload -->
-      <form method="post" enctype="multipart/form-data">
-          {% csrf_token %}
+      <div class="container-fora">
+
+          <div class="container">
+    
+              <p style="font-size: 30px; border: dashed #ccc 2px; border-radius: 4px; padding-left: 20px; padding-right: 20px;">Módulos disponíveis {{ form.modulo }}</p> 
+              <!-- Formulário de upload -->
+              <form method="post" enctype="multipart/form-data" class="form">
+                  {% csrf_token %}
+                  
+                 <label style="font-size: 30px;"> Título: {{ form.title }}</label> 
+                  <!-- Área de arraste e soltar -->
+                  <div class="drag-area" id="drag-area">
+                      Arraste e solte o arquivo aqui ou clique para selecionar
+                  </div>
           
-         <label> Titulo {{ form.title }}</label> 
-          <!-- Área de arraste e soltar -->
-          <div class="drag-area" id="drag-area">
-              Arraste e solte o arquivo aqui ou clique para selecionar
+                  <!-- Campo de upload tradicional escondido -->
+                  <input type="file" id="file-input" name="file" class="file-input">
+          
+                  <!-- Botão de envio -->
+                  <button type="submit" class="btn">Enviar</button>
+              </form>
           </div>
-  
-          <!-- Campo de upload tradicional escondido -->
-          <input type="file" id="file-input" name="file" class="file-input">
-  
-          <!-- Botão de envio -->
-          <button type="submit">Enviar</button>
-      </form>
+      </div>
 
-      <button ><a href="{% url 'listar_material' %}"> Acessar Gerenciamenteo</a></button>
+      <button class="btn"><a href="{% url 'listar_material' %}"> Acessar Gerenciamenteo</a></button>
 
 
-      <button ><a href="{% url 'cadastro_geral' %}"> Voltar</a></button>
+      <button class="btn"><a href="{% url 'cadastro_geral' %}"> Voltar</a></button>
   
       <script>
           const dragArea = document.getElementById('drag-area');
@@ -57,13 +48,13 @@
           dragArea.addEventListener('click', () => {
               fileInput.click();
           });
-  
+
           // Adiciona a classe "hover" quando o arquivo está sendo arrastado sobre a área
           dragArea.addEventListener('dragover', (event) => {
               event.preventDefault();
               dragArea.classList.add('hover');
           });
-  
+
           // Remove a classe "hover" quando o arquivo não está mais sobre a área
           dragArea.addEventListener('dragleave', () => {
               dragArea.classList.remove('hover');

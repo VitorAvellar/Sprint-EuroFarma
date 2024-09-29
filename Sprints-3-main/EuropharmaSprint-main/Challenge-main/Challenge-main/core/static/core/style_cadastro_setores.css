@@ -5,10 +5,10 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
     background-color: #f9f9f9;
     color: #333;
     padding: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
 h1 {
@@ -49,23 +49,6 @@ form select:focus {
     border-color: #1d76c5;
 }
 
-/* Estilo do botão */
-form button[type="submit"] {
-    width: 100%;
-    padding: 12px;
-    background-color: #1d76c5;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.2em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-form button[type="submit"]:hover {
-    background-color: #0b39c4;
-}
-
 /* Link de voltar */
 .voltar {
     text-align: center;
@@ -86,10 +69,17 @@ form button[type="submit"]:hover {
 }
 
 /* Add a container to wrap all the content */
-.container {
-  max-width: 800px; /* adjust the width as needed */
-  margin: 40px auto; /* add some margin and center the container */
-  text-align: center; /* center all the text inside the container */
+.container{
+margin-top: 10px;
+padding-top:50px;
+padding-bottom:50px;
+margin-left: 90px;
+width: 90%;
+display: flex;
+flex-direction: row;
+background-color: #03358E;
+justify-content: center;
+border-radius: 7px;
 }
 
 /* Add some styles to the form and buttons */
@@ -98,7 +88,23 @@ form {
   text-align: center; /* center the form elements */
 }
 
-.btn {
-  display: inline-block; /* make the buttons inline-block elements */
-  margin: 10px; /* add some margin around the buttons */
+.btn{
+    margin-top: 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10em;
+    font-size: medium;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.btn a{
+    text-decoration: none;
+    color: inherit;
+    background: none;
+    border: none;
+}
+
+.btn:hover{
+    background-color: #03358E;
+    transition: 0.3s;
 }

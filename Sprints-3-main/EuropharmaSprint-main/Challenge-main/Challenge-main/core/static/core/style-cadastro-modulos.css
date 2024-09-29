@@ -1,12 +1,16 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+* {
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     align-items: center;
-    height: 100vh;
+    text-align: center;
 }
 h1 {
     color: #333;
@@ -17,6 +21,7 @@ form {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 300px;
+    margin-left: 42%;
 }
 form p {
     margin-bottom: 15px;
@@ -36,14 +41,37 @@ form textarea {
     border: 1px solid #ddd;
     border-radius: 4px;
 }
-form button {
-    background-color: #3d64d1;
-    color: #fff;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+
+.container{
+margin-top: 10px;
+padding-top:50px;
+padding-bottom:50px;
+margin-left: 90px;
+width: 90%;
+
+flex-direction: row;
+background-color: #03358E;
+justify-content: center;
+border-radius: 7px;
 }
-form button:hover {
-    background-color: #0803a1;
+
+.btn{
+    margin-top: 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10em;
+    font-size: medium;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.btn a{
+    text-decoration: none;
+    color: inherit;
+    background: none;
+    border: none;
+}
+
+.btn:hover{
+    background-color: #03358E;
+    transition: 0.3s;
 }

@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 20px;
@@ -23,7 +23,7 @@ th, td {
 }
 
 th {
-    background-color: #303ce2;
+    background-color: #20278f;
     color: white;
 }
 
@@ -33,4 +33,22 @@ tr:nth-child(even) {
 
 tr:hover {
     background-color: #ddd;
+}
+
+.btn{
+    margin-top: 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10em;
+    font-size: medium;
+}
+.btn a{
+    text-decoration: none;
+    color: inherit;
+    background: none;
+    border: none;
+}
+
+.btn:hover{
+    background-color: #03358E;
+    transition: 0.3s;
 }

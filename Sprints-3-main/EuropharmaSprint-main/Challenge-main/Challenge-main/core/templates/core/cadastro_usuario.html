@@ -15,15 +15,15 @@
         <h4>Cadastre um usuário:</h4>
 
         <!-- O Django renderiza automaticamente o formulário -->
-        <form method="POST">
+        <form method="POST" style="font-size: 15px;">
             {% csrf_token %}  <!-- Token de segurança obrigatório no Django -->
             {{ form.as_p }}  <!-- Renderiza todos os campos do formulário de maneira automática -->
 
-            <button type="submit">Cadastrar</button>
+            <button type="submit" class="btn">Cadastrar</button>
         </form>
         <br>
         <div class="mt-3">
-            <a href="{% url 'cadastro_geral' %}" class="btn"><button>Voltar para o inicio</button></a>
+            <a href="{% url 'cadastro_geral' %}" class="btn"><button class="btn">Voltar para o inicio</button></a>
         </div> 
 
         <!-- Exibe erros, se houver -->

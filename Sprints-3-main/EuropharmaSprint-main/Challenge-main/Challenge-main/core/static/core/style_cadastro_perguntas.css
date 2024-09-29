@@ -83,4 +83,5 @@ textarea:focus {
 
 .btn:hover{
     background-color: #003fac;
+    transition: 0.3s;
 }

@@ -15,16 +15,16 @@
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Adicionar</button>
+        <button type="submit" class="btn">Adicionar</button>
     </form>
-
-    <div class="voltar">
+    <button class="btn">
         <a href="{% url 'acervo_videos' %}">Voltar para o Acervo</a>
-    </div>
-
-    <div class="voltar">
+    </button>
+    
+    <button class="btn">
         <a href="{% url 'cadastro_geral' %}">Voltar para inicio</a>
-    </div>
+    </button>
+
 
 </body>
 

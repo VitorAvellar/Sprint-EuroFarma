@@ -5,6 +5,14 @@ body{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
+a{
+    color: #000;
+}
+
+.title{
+    margin-top: 50px;
+}
+
 .txt{
     font-size: 2em;
     text-decoration: underline;
@@ -84,7 +92,7 @@ justify-content: center;
     margin-top: 10px;
     background-color: rgb(255, 255, 255);
     border-radius: 10em;
-    font-size: x-large;
+    font-size: medium;
 }
 .btn a{
     text-decoration: none;

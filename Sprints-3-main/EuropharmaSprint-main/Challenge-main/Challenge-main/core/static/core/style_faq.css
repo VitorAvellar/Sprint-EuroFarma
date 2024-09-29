@@ -41,6 +41,7 @@ h2 {
 
 .btn:hover{
     background-color: #024cce;
+    transition: 0.3s;
 }
 
 

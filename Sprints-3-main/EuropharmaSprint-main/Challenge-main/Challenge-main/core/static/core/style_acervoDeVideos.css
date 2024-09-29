@@ -42,6 +42,7 @@ select {
 
 .btn:hover{
     background-color: #03358E;
+    transition: 0.3s;
 }
 
 .video-container {

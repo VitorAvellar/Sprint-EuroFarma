@@ -10,20 +10,32 @@
 </head>
 <body>
 
-    <header>
-        <div class="hdr">
-            <div class="hdr_eur">
-                <img class="eur" src="../../static/images/europahma.png" alt="">
-            </div>
-            <div class="hdr_lgn">
-                
-                <img class="icon" src="../../static/images/user.png" alt="">
-                <p id="var_usu"></p>
-            </div>
-        </div>
-    </header>
+    <!-- Botão de menu -->
+    <div class="open-sidebar" onclick="toggleSidebar()">&#9776;</div>
+
+    <!-- Menu deslizante -->
+    <div id="sidebar" class="sidebar">
+        <!-- Botão para fechar o menu -->
+        <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">&times;</a>
+
+        <!-- Conteúdo do menu -->
+        <div class="menu-title">Nome do Treinamento</div>
+        <div class="submenu-title">Nome do Primeiro Módulo</div>
+        <a href="#" class="submenu-item">Aulas</a>
+        <a href="#" class="submenu-item">Materiais</a>
+        <a href="#" class="submenu-item">Exercícios</a>
+        
+        <div class="submenu-title">Nome do Segundo Módulo</div>
+        <a href="#" class="submenu-item">Aulas</a>
+        <a href="#" class="submenu-item">Materiais</a>
+    </div>
+
+    <div class="header">
+        &emsp;
+        <span>👤 Nome_user___</span>
+    </div>
     <hr>
-    <h1> Portal Do Administrador</h1>
+    <h1 class="title"> Portal Do Administrador</h1>
 
     <div class="container">
         <div class="usuarios">
@@ -71,6 +83,13 @@
     <script src="{% static 'js/script.js' %}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', validaUsu);
+    </script>
+
+    <script>
+        // Função para abrir e fechar o menu
+        function toggleSidebar() {
+            document.getElementById("sidebar").classList.toggle("active");
+        }
     </script>
 </body>
 </html>
